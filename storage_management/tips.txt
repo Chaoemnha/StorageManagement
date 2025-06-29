@@ -1,0 +1,12 @@
+Ctrl + Space: Gợi ý code
+
+Ctrl + Shift + O: Tự động import
+
+Ctrl + Shift + F: Format code
+
+Alt + Shift + S: Generate code (getter/setter/constructor)
+
+Ctrl + Shift + T: Mở nhanh class
+
+Ctrl + Shift + R: Mở nhanh resource
+

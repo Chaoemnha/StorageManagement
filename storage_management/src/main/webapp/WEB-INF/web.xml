@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	version="3.1">
+	<display-name>storage_management</display-name>
+	<!--dispatcher servlet la trung tam dieu khien, tiep nhan req tra ve res, 
+		thuc hien giao tiep giua cac class trong spring voi nhau -->
+	<servlet>
+		<servlet-name>spring-mvc</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<!-- Map all requests to the DispatcherServlet for handling -->
+	<servlet-mapping>
+		<servlet-name>spring-mvc</servlet-name>
+		<!-- /:call - Moi req duoc spring-mvc xly het  -->
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+</web-app>
