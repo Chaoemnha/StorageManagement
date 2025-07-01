@@ -10,7 +10,7 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import storage.model.User;
-import storage.service.UserServicce;
+import storage.service.UserService;
 @Component
 public class LoginValidator implements Validator{
 	@Autowired
