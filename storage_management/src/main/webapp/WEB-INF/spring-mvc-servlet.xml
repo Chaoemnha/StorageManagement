@@ -69,14 +69,14 @@
 	</bean>
 
 	<!-- Transaction Manager -->
+	<tx:annotation-driven
+		transaction-manager="transactionManager" />
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
 	<!-- Kích hoạt hỗ trợ transaction annotation -->
-	<tx:annotation-driven
-		transaction-manager="transactionManager" />
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 	<!-- order = 0 thi spring uu tien xu ly truoc -->
 	<!-- Khi khong tim thay ket qua no xu ly tiep thang order 1, neu van ko thay kq tra ve file not found -->
