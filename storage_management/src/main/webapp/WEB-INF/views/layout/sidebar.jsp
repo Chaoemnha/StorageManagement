@@ -10,7 +10,7 @@
                                 <li id="${menu.idMenu }"><a><i class="fa fa-home"></i> ${menu.name} <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                     <c:forEach items="${menu.child }" var="child">
-                                    <li id="${child.idMenu }"><a href="<c:url value="${child.url }"></c:url>">${child.name}</a></li></c:forEach>
+                                    <li id="${child.idMenu }";><a href="<c:url value="${child.url }"></c:url>">${child.name}</a></li></c:forEach>
                                     </ul>
                                 </li></c:forEach>
                             </ul>
