@@ -18,4 +18,9 @@ public class UserService {
 		log.info("Find user by property start");
 		return userDAO.findByProperty(property, value);
 	}
+	public User save(User user) {
+		userDAO.save(user);
+		return user;
+		
+	};
 }

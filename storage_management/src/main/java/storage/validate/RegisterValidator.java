@@ -12,7 +12,7 @@ import org.springframework.validation.Validator;
 import storage.model.User;
 import storage.service.UserService;
 @Component
-public class LoginValidator implements Validator{
+public class RegisterValidator implements Validator{
 	@Autowired
 	private UserService userService;
 	public boolean supports(Class<?> clazz) {
@@ -22,16 +22,16 @@ public class LoginValidator implements Validator{
 	public void validate(Object target, Errors errors) {
 		User user = (User) target;
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userName", "msg.required");
-		ValidationUtils.rejectIfEmpty(errors, "password", "msg.required");
-		if(StringUtils.hasLength(user.getUserName())&& StringUtils.hasLength(user.getPassword())) {
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "msg.required");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "msg.required");
+		if(StringUtils.hasLength(user.getUserName())&& StringUtils.hasLength(user.getPassword())&&StringUtils.hasLength(user.getEmail())) {
 			List<User> users = userService.findByProperty("userName", user.getUserName());
+			List<User> userz = userService.findByProperty("email", user.getEmail());
 			if(users!=null && !users.isEmpty()) {
-				if(!users.get(0).getPassword().equals(user.getPassword())) {
-					errors.rejectValue("password", "msg.wrong.password");
-				}
+				errors.rejectValue("userName", "msg.username.is.already.exists.!");
 			}
-				else {
-					errors.rejectValue("userName", "msg.wrong.username");
+				else if(userz!=null && !userz.isEmpty()) {
+					errors.rejectValue("email", "msg.email.is.already.exists.!");
 				}
 		}
 	}

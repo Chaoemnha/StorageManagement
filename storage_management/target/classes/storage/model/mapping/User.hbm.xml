@@ -16,6 +16,7 @@
         <property name="activeFlag" column="ACTIVE_FLAG" type="java.lang.Integer" not-null="true"/>
         <property name="createDate" column="CREATE_DATE" type="timestamp"/>
         <property name="updateDate" column="UPDATE_DATE" type="timestamp"/>
+        <property name="avatar" column="AVATAR" type="string" length="255"/>
         
         <!-- One-to-Many relationships -->
         <set name="userRoles" cascade="all" lazy="true" inverse="true">
