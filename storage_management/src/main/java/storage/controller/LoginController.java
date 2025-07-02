@@ -133,4 +133,16 @@ public class LoginController {
 		return "redirect:/login";
 	}
 	
+	@GetMapping("/access-denied")
+	public String accessDenied() {
+		return "access-denied";
+	}
+	
+	@GetMapping("/logout")
+	public String llogout(HttpSession session) {
+		session.removeAttribute(Constant.MENU_SESSION);
+		session.removeAttribute(Constant.USER_INFO);
+				return "redirect:/login";
+	}
+	
 }
