@@ -28,10 +28,10 @@ public class RegisterValidator implements Validator{
 			List<User> users = userService.findByProperty("userName", user.getUserName());
 			List<User> userz = userService.findByProperty("email", user.getEmail());
 			if(users!=null && !users.isEmpty()) {
-				errors.rejectValue("userName", "msg.username.is.already.exists.!");
+				errors.rejectValue("userName", "msg.username.exists");
 			}
 				else if(userz!=null && !userz.isEmpty()) {
-					errors.rejectValue("email", "msg.email.is.already.exists.!");
+					errors.rejectValue("email", "msg.email.exists");
 				}
 		}
 	}
