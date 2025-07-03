@@ -53,16 +53,16 @@
 		</property>
 		<property name="mappingResources">
 			<list>
-				<value>storage/nodel/mapping/Auth.hbm.xml</value>
+				<value>storage/model/mapping/Auth.hbm.xml</value>
 				<value>storage/model/mapping/Category.hbm.xml</value>
 				<value>storage/model/mapping/History.hbm.xml</value>
 				<value>storage/model/mapping/Invoice.hbm.xml</value>
-				<value>storage/nodel/mapping/Menu.hbm.xml</value>
+				<value>storage/model/mapping/Menu.hbm.xml</value>
 				<value>storage/model/mapping/ProductInfo.hbm.xml</value>
-				<value>storage/nodel/mapping/ProductInStock.hbm.xml</value>
-				<value>storage/nodel/mapping/Role.hbm.xml</value>
+				<value>storage/model/mapping/ProductInStock.hbm.xml</value>
+				<value>storage/model/mapping/Role.hbm.xml</value>
 				<value>storage/model/mapping/UserRole.hbm.xml</value>
-				<value>storage/nodel/mapping/Users.hbm.xml</value>
+				<value>storage/model/mapping/User.hbm.xml</value>
 			</list>
 		</property>
 	</bean>
