@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.asura.model">
+    <class name="Role" table="role">
+        <id name="id" column="ID" type="java.lang.Integer">
+            <generator class="identity"/>
+        </id>
+        
+        <property name="roleName" column="ROLE_NAME" type="string" length="50" not-null="true"/>
+        <property name="description" column="DESCRIPTION" type="string" length="200"/>
+        <property name="activeFlag" column="ACTIVE_FLAG" type="java.lang.Integer" not-null="true"/>
+        <property name="createDate" column="CREATE_DATE" type="timestamp"/>
+        <property name="updateDate" column="UPDATE_DATE" type="timestamp"/>
+        
+        <!-- One-to-Many relationships -->
+        <set name="userRoles" cascade="all" lazy="true" inverse="true">
+            <key column="ROLE_ID"/>
+            <one-to-many class="UserRole"/>
+        </set>
+        
+        <set name="auths" cascade="all" lazy="true" inverse="true">
+            <key column="ROLE_ID"/>
+            <one-to-many class="Auth"/>
+        </set>
+    </class>
+</hibernate-mapping>
