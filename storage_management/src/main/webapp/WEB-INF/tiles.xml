@@ -11,5 +11,12 @@
 <definition name="index" extends="master">
         <put-attribute name="body" value="/WEB-INF/views/index.jsp"/>
     </definition>
+<definition name="category-action" extends="master">
+    <put-attribute name="body" value="/WEB-INF/views/category-action.jsp"/>
+</definition>
+
+<definition name="category-list" extends="master">
+    <put-attribute name="body" value="/WEB-INF/views/category-list.jsp"/>
+</definition>
     <definition name="access-denied" template="/WEB-INF/views/error-page/access-denied.jsp"/>
 </tiles-definitions>

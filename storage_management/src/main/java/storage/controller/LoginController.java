@@ -19,6 +19,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
+import storage.dto.AuthDTO;
+import storage.dto.RoleDTO;
+import storage.dto.UserRoleDTO;
 import storage.model.Auth;
 import storage.model.Menu;
 import storage.model.Role;
@@ -67,55 +70,67 @@ public class LoginController {
 	@PutMapping("/login")
 	public String processRegister(@ModelAttribute("registerForm") @Validated User user, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            return "redirect:/login#signup";
+            model.addAttribute("registerForm", user);
+            model.addAttribute("loginForm", new User());
+        	return "login/login";
         }
         // Tạo URL Gravatar từ email
         // Lưu user mới
         String avatar = HashEmail.sha256Hex(user.getEmail());
         System.out.println("####Avatar: " + avatar);
         User userSaved = userService.save(new User(user.getUserName(), user.getPassword(), user.getEmail(), user.getName(), avatar,1));
-        userRoleService.save(new UserRole(userSaved, roleService.findByProperty("id", 2).get(0), 1));
+        List<Role> role = roleService.findByProperty("id", 1);
+        if(!role.isEmpty()) {
+        userRoleService.save(new UserRole(userSaved, role.get(0), 1));
         return "redirect:/login#signin";
+        }
+        return "login/login";
     }
 
 	@PostMapping("/login")
 	public String processLogin(Model model, @ModelAttribute("loginForm")@Validated User user, BindingResult result, HttpSession session) {
 		//BindingRes la ket qua tra ve, httpSes giong SessionStorage
-		if(result.hasErrors()) return "redirect:/login#signin";
+		if(result.hasErrors()) {
+		    model.addAttribute("registerForm", new User());
+		    model.addAttribute("loginForm", user);return "login/login";}
 		//Sinh menu dong
-		User uzer = userService.findByProperty("userName", user.getUserName()).get(0);
-		UserRole userRole = userRoleService.findByProperty("user", uzer).get(0);
+		List<User> uzer = userService.findByProperty("userName", user.getUserName());
+		if(!uzer.isEmpty()) {
+		List<UserRoleDTO> userRole = userRoleService.findUserRoleDTOsByUserId(uzer.get(0).getId());
 		List<Menu> menuList = new ArrayList<Menu>();
-		Role role = userRole.getRole();
+		RoleDTO role = roleService.findRoleWithRoleId(userRole.get(0).getRole());
 		List<Menu> menuChildList = new ArrayList<Menu>();
 		//Lay menu theo role id, tim menu cha truoc (co parent id =0)
-		for(Object obj : role.getAuths()) {
-			Auth auth = (Auth) obj;
-			Menu menu = auth.getMenu();
-			if(menu.getParentId() ==0 && menu.getOrderIndex()!=-1&&menu.getActiveFlag()==1&&auth.getPermission()==1&&auth.getActiveFlag()==1) {
+		for(AuthDTO obj : role.getAuths()) {
+			Menu menu = obj.getMenu();
+			if(menu.getParentId() ==0 && menu.getOrderIndex()!=-1&&menu.getActiveFlag()==1&&obj.getPermission()==1&&obj.getActiveFlag()==1) {
 				menu.setIdMenu(menu.getUrl().replace("/", "")+"Id"); //vd catogory/list -> categorylistId
 				menuList.add(menu);
 			}
-			else if(menu.getParentId() !=0 && menu.getOrderIndex()!=-1&&menu.getActiveFlag()==1&&auth.getPermission()==1&&auth.getActiveFlag()==1) {
+			else if(menu.getParentId() !=0 && menu.getOrderIndex()!=-1&&menu.getActiveFlag()==1&&obj.getPermission()==1&&obj.getActiveFlag()==1) {
 				menu.setIdMenu(menu.getUrl().replace("/", "")+"Id"); //vd catogory/list -> categorylistId
 				menuChildList.add(menu);
-			}
 		}
-		for(Menu menu: menuList) {
+		}
+		for(Menu men: menuList) {
 			List<Menu> childList = new ArrayList<Menu>();
 			for(Menu childMenu:menuChildList) {
-				if(childMenu.getParentId()==menu.getId())
+				if(childMenu.getParentId()==men.getId())
 					childList.add(childMenu);
 			}
-			menu.setChild(childList);
+			men.setChild(childList);
 		}
 		sortMenu(menuList);
-		for(Menu menu: menuList)
-			sortMenu(menu.getChild());
+		for(Menu men: menuList)
+			sortMenu(men.getChild());
 
-		session.setAttribute(Constant.USER_INFO, uzer);
+		session.setAttribute(Constant.USER_INFO, uzer.get(0));
 		session.setAttribute(Constant.MENU_SESSION, menuList);
 		return "redirect:/index";
+		}
+	    model.addAttribute("registerForm", new User());
+	    model.addAttribute("loginForm", user);
+		return "login/login";
 	}
 
 	//Ham sap xep menu theo order

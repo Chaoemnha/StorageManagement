@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import storage.dao.RoleDAO;
+import storage.dto.RoleDTO;
 import storage.model.Role;
 
 @Service
@@ -21,4 +22,7 @@ public class RoleService {
 	public void save(Role role) {
 		roleDAO.save(role);
 	};
+	public RoleDTO findRoleWithRoleId(Integer id) {
+		return roleDAO.findRoleWithRoleId(id);
+	}
 }
