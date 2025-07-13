@@ -3,13 +3,15 @@ package storage.validate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import storage.model.Category;
 import storage.service.ProductService;
-
+@Component
 public class CategoryValidator implements Validator{
 	@Autowired
 	private ProductService productService;
@@ -28,9 +30,11 @@ public class CategoryValidator implements Validator{
 		ValidationUtils.rejectIfEmpty(errors, "description", "msg.required");
 		if(category.getCode()!=null) {
 		List<Category> result =  productService.findCategory("code", category.getCode());
-		if(result!=null && !result.isEmpty()) {
-			errors.rejectValue("code", "msg.code.exists");
-		}
+		if(category.getId()!=null && category.getId()!=0)
+			if(result.get(0).getId()!=category.getId())
+				errors.rejectValue("code", "msg.code.exists");
+		if(category.getId()==null)
+			if(!result.isEmpty()) errors.rejectValue("code", "msg.code.exists");
 		}
 	}
 
