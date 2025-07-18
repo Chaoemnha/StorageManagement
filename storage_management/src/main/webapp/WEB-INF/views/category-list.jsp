@@ -8,12 +8,52 @@
                                         <div class="x_title">
                                             <h2>Category List
                                             </h2>
-                                            
                                             <div class="clearfix"></div><a class="btn btn-app" href="<c:url value="/category/add"/>"><i class="fa fa-plus"></i>Add</a>
                                         </div>
 
                                         <div class="x_content">
+											<div class="container">
+											<form:form modelAttribute="searchForm" cssClass="form-horizontal form-label-left" servletRelativeAction="/category/list" method="POST">
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <label for="middle-name"
+                                                               class="control-label col-md-3 col-sm-3 col-12">ID</label>
+                                                        <div class="col-md-6 col-sm-6 col-12">
+									                        <form:input type="text" class="form-control" placeholder="Id..." path="id"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <label class="control-label col-md-3 col-sm-3 col-12"
+                                                               for="first-name">Code 
+                                                        </label>
+                                                        <div class="col-md-6 col-sm-6 col-12">
+									                        <form:input type="text" class="form-control" placeholder="Code..." path="code"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <label class="control-label col-md-3 col-sm-3 col-12"
+                                                               for="last-name">Name 
+                                                        </label>
+                                                        <div class="col-md-6 col-sm-6 col-12">
+									                        <form:input type="text" class="form-control" placeholder="Name..." path="name"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <div class="col-md-6 col-sm-6 col-12 col-md-offset-3">
+                                                            <button type="submit" class="btn btn-success">Submit
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
 
+                                            </form:form>
+                                        </div>
                                             <div class="table-responsive">
                                                 <table class="table table-striped jambo_table bulk_action">
                                                     <thead>
@@ -59,12 +99,35 @@
                                 
                         </div>
                     </div>
-                    <script type="text/javascript">
+<script type="text/javascript">
   function confirmDelete(id) {
     if (confirm("Do you want to delete this record?")) {
-      // Gọi đúng URL bằng cách gán trước base path bằng JSTL
       var baseUrl = '<c:url value="/category/delete/" />';
       window.location.href = baseUrl + id;
     }
   }
+
+  document.addEventListener("DOMContentLoaded", function () {
+	    processMessage();
+	});
+    function processMessage() {
+      var msgError = "${msgError}";
+      var msgSuccess = "${msgSuccess}";
+      if (msgSuccess) {
+          new PNotify({
+              title: "Success",
+              text: msgSuccess,
+              type: 'success',
+              styling: 'bootstrap3'
+          });
+      }
+      if (msgError) {
+        new PNotify({
+          title: "Error",
+          text: msgError,
+          type: 'error',
+          styling: 'bootstrap3'
+        });
+      }
+    }
 </script>
