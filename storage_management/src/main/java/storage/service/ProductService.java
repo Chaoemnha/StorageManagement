@@ -4,11 +4,14 @@ package storage.service;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import storage.dao.CategoryDAO;
 import storage.model.Category;
@@ -43,9 +46,26 @@ public class ProductService {
 		return categoryDAO.findByProperty(property, object);
 	}
 	
-	public List<Category> getAll() {
+	public List<Category> getAll(Category category) {
 		LOGGER.info("show all category");
-		return categoryDAO.findAll();
+		StringBuilder queryStr = new StringBuilder();
+		Map<String, Object> mapParams = new HashMap<String, Object>();
+		if(category!=null) {
+			if(category.getId()!=null&&category.getId()!=0) {
+				queryStr.append(" and model.id=:id");
+				mapParams.put("id", category.getId());
+			}
+			//Kiem tra ca rong thi cta cx ko xly
+			if(category.getCode()!=null&&StringUtils.hasLength(category.getCode())) {
+				queryStr.append(" and model.code=:code");
+				mapParams.put("code", category.getCode());
+			}
+			if(category.getName()!=null&&StringUtils.hasLength(category.getName())) {
+				queryStr.append(" and model.name=:name");
+				mapParams.put("name", category.getName());
+			}
+		}
+		return categoryDAO.findAll(queryStr.toString(), mapParams);
 	}
 	
 	public Category findByIdCategory(int id) {
