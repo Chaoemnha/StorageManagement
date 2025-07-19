@@ -95,6 +95,7 @@ public class ProductInfoController {
 			for(Category category:categories) {
 				mapCategory.put(String.valueOf(category.getId()), category.getName());
 			}
+			productInfo.setCateId(productInfo.getCategory().getId());
 			model.addAttribute("mapCategory",mapCategory);
 			model.addAttribute("titlePage", "Edit ProductInfo");
 			model.addAttribute("modelForm", productInfo);
@@ -134,6 +135,9 @@ public class ProductInfoController {
 			model.addAttribute("viewOnly", false);
 			return "productInfo-action";
 		}
+		Category category = new Category();
+		category.setId(productInfo.getCateId());
+		productInfo.setCategory(category);
 		if(productInfo.getId()!=null && productInfo.getId()!=0) {
 			try {
 			productService.updateProductInfo(productInfo);
