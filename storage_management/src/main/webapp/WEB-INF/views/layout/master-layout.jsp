@@ -12,6 +12,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Asura Storage Management! | </title>
+<!-- jQuery -->
+<script src="<c:url value='/resources/vendors/jquery/dist/jquery.js'/>"></script>
 
     <!-- Bootstrap -->
     <!-- Dinh nghia cac duong dan header bang the c:url, la 1 cong dung cua jstl -->
@@ -98,8 +100,6 @@ aw
     </div>
 </div>
 
-<!-- jQuery -->
-<script src="<c:url value='/resources/vendors/jquery/dist/jquery.min.js'/>"></script>
 <!-- Popper -->
 <script src="<c:url value='/resources/vendors/popper/popper.min.js'/>"></script>
 <!-- Bootstrap -->
