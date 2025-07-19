@@ -90,8 +90,8 @@ public class ProductService {
 		productInfo.setActiveFlag(1);
 		productInfo.setCreateDate(new Timestamp(new Date().getTime()));
 		productInfo.setUpdateDate(new Timestamp(new Date().getTime()));
-		productInfo.setImgUrl("/upload/"+productInfo.getMultipartFile().getOriginalFilename());
 		processUploadFile(productInfo.getMultipartFile());
+		productInfo.setImgUrl("/upload/"+System.currentTimeMillis()+"_"+productInfo.getMultipartFile().getOriginalFilename());
 		productInfoDAO.save(productInfo);
 	}
 	
