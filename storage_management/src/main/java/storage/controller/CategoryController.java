@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import storage.model.Category;
+import storage.model.Paging;
 import storage.service.ProductService;
 import storage.util.Constant;
 import storage.validate.CategoryValidator;
@@ -43,11 +44,16 @@ public class CategoryController {
 		if(binder.getTarget().getClass()==Category.class)
 			binder.setValidator(categoryValidator);
 	}
+	@RequestMapping(value={"/category/list","/category/list/"})
+	public String redirect() {
+		return "redirect:/category/list/1";
+	}
 	
-	@RequestMapping("/category/list")
-	public String showCategoryList(Model model, HttpSession httpSession, @ModelAttribute("searchForm") Category category) {
-		
-		List<Category> categories = productService.getAll(category);
+	@RequestMapping("/category/list/{page}")
+	public String showCategoryList(Model model, HttpSession httpSession, @ModelAttribute("searchForm") Category category, @PathVariable("page") int page) {
+		Paging paging = new Paging(3);
+		paging.setIndexPage(page);
+		List<Category> categories = productService.getAll(category, paging);
 	     if (httpSession.getAttribute(Constant.MSG_SUCCESS) != null) {
 	         model.addAttribute(Constant.MSG_SUCCESS, httpSession.getAttribute(Constant.MSG_SUCCESS));
 	         httpSession.removeAttribute(Constant.MSG_SUCCESS);
@@ -57,7 +63,7 @@ public class CategoryController {
 			model.addAttribute(Constant.MSG_ERROR, httpSession.getAttribute(Constant.MSG_ERROR));
 			httpSession.removeAttribute(Constant.MSG_ERROR);
 		}
-		
+		model.addAttribute("pageInfo", paging);
 		model.addAttribute("categories",categories);
 		return "category-list";
 	}
