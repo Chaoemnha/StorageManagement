@@ -15,6 +15,7 @@ import org.springframework.util.StringUtils;
 
 import storage.dao.CategoryDAO;
 import storage.model.Category;
+import storage.model.Paging;
 
 @Service
 public class ProductService {
@@ -46,7 +47,7 @@ public class ProductService {
 		return categoryDAO.findByProperty(property, object);
 	}
 	
-	public List<Category> getAll(Category category) {
+	public List<Category> getAll(Category category, Paging paging) {
 		LOGGER.info("show all category");
 		StringBuilder queryStr = new StringBuilder();
 		Map<String, Object> mapParams = new HashMap<String, Object>();
@@ -61,11 +62,11 @@ public class ProductService {
 				mapParams.put("code", category.getCode());
 			}
 			if(category.getName()!=null&&StringUtils.hasLength(category.getName())) {
-				queryStr.append(" and model.name=:name");
-				mapParams.put("name", category.getName());
+				queryStr.append(" and model.name like :name");
+				mapParams.put("name", "%"+category.getName()+"%");
 			}
 		}
-		return categoryDAO.findAll(queryStr.toString(), mapParams);
+		return categoryDAO.findAll(queryStr.toString(), mapParams, paging);
 	}
 	
 	public Category findByIdCategory(int id) {
