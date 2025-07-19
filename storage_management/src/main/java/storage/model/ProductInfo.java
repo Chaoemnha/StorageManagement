@@ -1,6 +1,9 @@
 package storage.model;
 
 import javax.persistence.*;
+
+import org.springframework.web.multipart.MultipartFile;
+
 import java.sql.Timestamp;
 import java.util.Set;
 
@@ -47,6 +50,7 @@ public class ProductInfo {
     @OneToMany(mappedBy = "productInfo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<History> histories;
     
+    private MultipartFile multipartFile;
     // Constructors
     public ProductInfo() {}
     
@@ -67,7 +71,15 @@ public class ProductInfo {
         return id;
     }
     
-    public void setId(Integer id) {
+    public MultipartFile getMultipartFile() {
+		return multipartFile;
+	}
+
+	public void setMultipartFile(MultipartFile multipartFile) {
+		this.multipartFile = multipartFile;
+	}
+
+	public void setId(Integer id) {
         this.id = id;
     }
     
