@@ -23,7 +23,6 @@ public class RoleDaoImpl extends BaseDAOImpl<Role> implements RoleDAO<Role>{
 	        .createQuery(hql, Role.class)
 	        .setParameter("id", id)
 	        .uniqueResult();
-	    Role dto;
 	    Set<Auth> auths = role.getAuths();
 	    List<AuthDTO> authDTOs = new ArrayList<AuthDTO>();
 	    for(Auth auth:auths) {
