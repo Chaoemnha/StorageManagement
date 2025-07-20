@@ -6,7 +6,7 @@
 	<div class="">
 		<div class="page-title">
 			<div class="title_left">
-				<h2>${titlePage }</h2>
+				<h2>${titlePage}</h2>
 			</div>
 		</div>
 		<div class="clearfix"></div>

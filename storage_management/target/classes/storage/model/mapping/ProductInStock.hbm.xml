@@ -14,6 +14,7 @@
         
         <property name="qty" column="QTY" type="java.lang.Integer" not-null="true"/>
         <property name="activeFlag" column="ACTIVE_FLAG" type="java.lang.Integer" not-null="true"/>
+        <property name="price" column="PRICE" type="big_decimal" precision="15" scale="2" not-null="true"/>
         <property name="createDate" column="CREATE_DATE" type="timestamp"/>
         <property name="updateDate" column="UPDATE_DATE" type="timestamp"/>
     </class>

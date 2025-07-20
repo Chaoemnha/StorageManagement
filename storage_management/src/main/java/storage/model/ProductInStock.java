@@ -1,6 +1,8 @@
 package storage.model;
 
 import javax.persistence.*;
+
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 @Entity
@@ -21,6 +23,9 @@ public class ProductInStock {
     
     @Column(name = "ACTIVE_FLAG", nullable = false)
     private Integer activeFlag;
+    
+    @Column(name = "PRICE", nullable = false)
+    private BigDecimal price;
     
     @Column(name = "CREATE_DATE")
     private Timestamp createDate;
@@ -46,7 +51,15 @@ public class ProductInStock {
     public ProductInfo getProductInfo() { return productInfo; }
     public void setProductInfo(ProductInfo productInfo) { this.productInfo = productInfo; }
     
-    public Integer getQty() { return qty; }
+    public BigDecimal getPrice() {
+		return price;
+	}
+
+	public void setPrice(BigDecimal price) {
+		this.price = price;
+	}
+
+	public Integer getQty() { return qty; }
     public void setQty(Integer qty) { this.qty = qty; }
         
     public Integer getActiveFlag() { return activeFlag; }
