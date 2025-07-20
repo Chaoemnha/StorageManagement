@@ -5,4 +5,5 @@ public class Constant {
 	public static final String MENU_SESSION = "menuSession";
 	public static final String MSG_SUCCESS = "msgSuccess";
 	public static final String MSG_ERROR = "msgError";
+	public static final Integer INVOICE_TYPE = 1;
 }
