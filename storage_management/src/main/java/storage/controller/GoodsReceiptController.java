@@ -28,7 +28,7 @@ import storage.model.Invoice;
 import storage.model.Paging;
 import storage.model.ProductInfo;
 import storage.model.User;
-import storage.service.GoodsReceiptReport;
+import storage.service.InvoiceReport;
 import storage.service.InvoiceService;
 import storage.service.ProductService;
 import storage.util.Constant;
@@ -169,7 +169,7 @@ public class GoodsReceiptController {
 		invoice.setType(Constant.TYPE_GOODS_RECEIPT);
 		List<Invoice> invoices = invoiceService.getList(invoice, null);
 		modelAndView.addObject(Constant.KEY_GOODS_RECEIPT_REPORT, invoices);
-		modelAndView.setView(new GoodsReceiptReport());
+		modelAndView.setView(new InvoiceReport());
 		return modelAndView;
 	}
 	
