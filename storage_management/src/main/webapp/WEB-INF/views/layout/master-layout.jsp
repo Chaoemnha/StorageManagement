@@ -12,18 +12,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Asura Storage Management! | </title>
-<!-- jQuery -->
-<script src="<c:url value='/resources/vendors/jquery/dist/jquery.js'/>"></script>
-
+	<!-- jQuery -->
+	<script src="<c:url value='/resources/vendors/jquery/dist/jquery.js'/>"></script>
+	<!-- Proper -->
+	<script src="<c:url value='/resources/vendors/popper/popper.min.js'/>"></script>
     <!-- Bootstrap -->
-    <!-- Dinh nghia cac duong dan header bang the c:url, la 1 cong dung cua jstl -->
-       <link href="<c:url value='/resources/vendors/bootstrap/dist/css/bootstrap.min.css' />" rel="stylesheet">
+    <link href="<c:url value='/resources/vendors/bootstrap/dist/css/bootstrap.min.css' />" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="<c:url value='/resources/vendors/font-awesome/css/font-awesome.min.css'/>" rel="stylesheet">
     <!-- NProgress -->
+    <link href="<c:url value="/resources/vendors/nprogress/nprogress.css"/>" rel="stylesheet">
+    <!-- PNotify -->
     <link href="<c:url value='/resources/vendors/pnotify/dist/pnotify.css'/>" rel="stylesheet">
     <link href="<c:url value='/resources/vendors/pnotify/dist/pnotify.buttons.css'/>" rel="stylesheet">
     <link href="<c:url value='/resources/vendors/pnotify/dist/pnotify.nonblock.css'/>" rel="stylesheet">
+    <!-- bootstrap-datetimepicker. -->
+	<!-- <link href="<c:url value="/resources/vendors/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css"/>" rel="stylesheet"> -->
+	<link href="<c:url value='/resources/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css'/>" rel="stylesheet">
     <!-- jQuery custom content scroller -->
     <link href="<c:url value='/resources/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css'/>" rel="stylesheet"/>
 
@@ -100,23 +105,25 @@ aw
     </div>
 </div>
 
-<!-- Popper -->
-<script src="<c:url value='/resources/vendors/popper/popper.min.js'/>"></script>
 <!-- Bootstrap -->
 <script src="<c:url value='/resources/vendors/bootstrap/dist/js/bootstrap.min.js'/>"></script>
 <!-- FastClick -->
 <script src="<c:url value='/resources/vendors/fastclick/lib/fastclick.js'/>"></script>
 <!-- NProgress -->
 <script src="<c:url value='/resources/vendors/nprogress/nprogress.js'/>"></script>
-<!-- jQuery custom content scroller --l
-<script src="<c:url value='/resources/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js'/>"></script>
+<!-- jQuery custom content scroller -->
+<script src="<c:url value="/resources/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"/>"></script>
 <!-- PNotify -->
-
 <script src="<c:url value='/resources/vendors/pnotify/dist/pnotify.nonblock.js'/>"></script>
 <script src="<c:url value='/resources/vendors/pnotify/dist/pnotify.js'/>"></script>
 <script src="<c:url value='/resources/vendors/pnotify/dist/pnotify.buttons.js'/>"></script>
-
-
+<!--bootstrap-daterangepicker-->
+<!-- <script src="<c:url value="/resources/vendors/moment/min/moment.min.js"/>"></script> -->
+<!-- bootstrap-datetimepicker -->
+<!-- <script src="<c:url value="/resources/vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"/>"></script> -->
+<script src="<c:url value='/resources/cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.min.js'/>"></script>
+<script src="<c:url value='/resources/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js'/>"></script>
+<script src="<c:url value='/resources/bootstrap-datetimepicker/js/demo.js'/>"></script>
 <!-- Custom Theme Scripts -->
 <script src="<c:url value='/resources/build/js/custom.js'/>"></script>
 <script>
