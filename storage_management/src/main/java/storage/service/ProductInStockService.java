@@ -48,34 +48,34 @@ public class ProductInStockService {
 	}
 	//Khi nhap hang hoa thi save hoa don day vao trong PIS de no cap nhat so luong hang hoa trong kho
 	public void saveOrUpdate(Invoice invoice){
-		LOGGER.info("Product in storage ");
-		//Kiem tra xem co ProductInfo ko
-		if(invoice.getProductInfo()!=null) {
-			String code = invoice.getProductInfo().getCode();
-			//Co roi thi xem code cua no co ton tai trong kho ko
-			ProductInStock productInStock = productInStockDAO.findByProperty("productInfo.code", code).get(0);
-			if(productInStock!=null) {
-				LOGGER.info("update qty="+invoice.getQty()+" and price="+invoice.getPrice());
-				productInStock.setQty(productInStock.getQty()+invoice.getQty());
-				//Neu nhap hang thi moi cap nhat gia
-				if(invoice.getType()==Constant.TYPE_GOODS_RECEIPT)
-					productInStock.setPrice(invoice.getPrice());
-				productInStock.setUpdateDate(new Timestamp(new Date().getTime()));
-				productInStockDAO.update(productInStock);
-			}
-			else if(invoice.getType()==1){
-				LOGGER.info("insert to storage qty="+invoice.getQty()+" and price="+invoice.getPrice());
-				productInStock = new ProductInStock();
-				ProductInfo productInfo = new ProductInfo();
-				productInfo.setId(invoice.getProductInfo().getId());
-				productInStock.setProductInfo(productInfo);
-				productInStock.setActiveFlag(1);
-				productInStock.setCreateDate(new Timestamp(new Date().getTime()));
-				productInStock.setUpdateDate(new Timestamp(new Date().getTime()));
-				productInStock.setQty(invoice.getQty());
-				productInStock.setPrice(invoice.getPrice());
-				productInStockDAO.save(productInStock);
-			}
-		}
+	    LOGGER.info("Product in storage ");
+	    if(invoice.getProductInfo()!=null) {
+	        String code = invoice.getProductInfo().getCode();
+	        List<ProductInStock> list = productInStockDAO.findByProperty("productInfo.code", code);
+	        
+	        if (!list.isEmpty()) {
+	            ProductInStock productInStock = list.get(0);
+	            LOGGER.info("update qty="+invoice.getQty()+" and price="+invoice.getPrice());
+	            productInStock.setQty(productInStock.getQty()+invoice.getQty());
+	            
+	            if(invoice.getType()==Constant.TYPE_GOODS_RECEIPT)
+	                productInStock.setPrice(invoice.getPrice());
+	            
+	            productInStock.setUpdateDate(new Timestamp(new Date().getTime()));
+	            productInStockDAO.update(productInStock);
+	        } else if(invoice.getType()==Constant.TYPE_GOODS_RECEIPT) {
+	            LOGGER.info("insert to storage qty="+invoice.getQty()+" and price="+invoice.getPrice());
+	            ProductInStock productInStock = new ProductInStock();
+	            ProductInfo productInfo = new ProductInfo();
+	            productInfo.setId(invoice.getProductInfo().getId());
+	            productInStock.setProductInfo(productInfo);
+	            productInStock.setActiveFlag(1);
+	            productInStock.setCreateDate(new Timestamp(new Date().getTime()));
+	            productInStock.setUpdateDate(new Timestamp(new Date().getTime()));
+	            productInStock.setQty(invoice.getQty());
+	            productInStock.setPrice(invoice.getPrice());
+	            productInStockDAO.save(productInStock);
+	        }
+	    }
 	}
 }
