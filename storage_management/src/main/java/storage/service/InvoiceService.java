@@ -14,6 +14,7 @@ import org.springframework.util.StringUtils;
 import storage.dao.InvoiceDAO;
 import storage.model.Invoice;
 import storage.model.Paging;
+import storage.model.ProductInfo;
 import storage.model.User;
 import storage.util.Constant;
 
@@ -44,15 +45,18 @@ public class InvoiceService {
 	public void update(Invoice invoice) throws Exception {
 		// Lay so luong hang hoa hien tai
 		int originQty = invoiceDAO.findById(Invoice.class, invoice.getId()).getQty();
+		ProductInfo productInfo = new ProductInfo();
+		productInfo.setId(invoice.getProductId());
+		invoice.setProductInfo(productInfo);
 		invoice.setUpdateDate(new Timestamp(new Date().getTime()));
-		invoice.setCode(invoice.getCode());
-		invoice.setProductInfo(productService.findProductInfo("id", invoice.getProductId()).get(0));
-		invoice.setQty(invoice.getQty());// hien tai=10, update qty=5 => 5-10=-5 => co the am/duong => am														// la xuat hang, duong la nhap hang
-		invoice.setPrice(invoice.getPrice());
+		Invoice invoice2 = new Invoice();
+		invoice2.setProductInfo(invoice.getProductInfo());
+		invoice2.setQty(invoice.getQty()-originQty);// hien tai=10, update qty=5 => 5-10=-5 => co the am/duong => am la xuat hang, duong la nhap hang	
+		invoice2.setPrice(invoice.getPrice());
 		// save invoice ben jsp vao DAO
 		invoiceDAO.update(invoice);
 		historyService.save(invoice, Constant.ACTION_EDIT);
-		productInStockService.saveOrUpdate(invoice);
+		productInStockService.saveOrUpdate(invoice2);
 	}
 
 	public List<Invoice> find(String property, Object value) {
