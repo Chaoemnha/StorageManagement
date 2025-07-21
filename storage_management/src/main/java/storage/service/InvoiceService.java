@@ -11,15 +11,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import storage.dao.HistoryDAO;
 import storage.dao.InvoiceDAO;
-import storage.model.History;
 import storage.model.Invoice;
 import storage.model.Paging;
+import storage.model.User;
 import storage.util.Constant;
 
 @Service
 public class InvoiceService {
+	@Autowired
+	private ProductService productService;
 	@Autowired
 	private HistoryService historyService;
 	@Autowired
@@ -28,10 +29,12 @@ public class InvoiceService {
 	private InvoiceDAO<Invoice> invoiceDAO;
 	static final Logger log = Logger.getLogger(InvoiceService.class);
 
-	public void save(Invoice invoice) throws Exception {
+	public void save(Invoice invoice, User user) throws Exception {
 		invoice.setActiveFlag(1);
 		invoice.setCreateDate(new Timestamp(new Date().getTime()));
 		invoice.setUpdateDate(new Timestamp(new Date().getTime()));
+		invoice.setProductInfo(productService.findProductInfo("id", invoice.getProductId()).get(0));
+		invoice.setUser(user);
 		invoiceDAO.save(invoice);
 		historyService.save(invoice, Constant.ACTION_ADD);
 		// Khi them hang hoa thi PIS se cap nhat hang hoa ben trong no
@@ -42,15 +45,14 @@ public class InvoiceService {
 		// Lay so luong hang hoa hien tai
 		int originQty = invoiceDAO.findById(Invoice.class, invoice.getId()).getQty();
 		invoice.setUpdateDate(new Timestamp(new Date().getTime()));
-		Invoice invoice2 = new Invoice();
-		invoice2.setProductInfo(invoice.getProductInfo());
-		invoice2.setQty(invoice.getQty() - originQty);// hien tai=10, update qty=5 => 5-10=-5 => co the am/duong => am
-														// la xuat hang, duong la nhap hang
-		invoice2.setPrice(invoice.getPrice());
+		invoice.setCode(invoice.getCode());
+		invoice.setProductInfo(productService.findProductInfo("id", invoice.getProductId()).get(0));
+		invoice.setQty(invoice.getQty());// hien tai=10, update qty=5 => 5-10=-5 => co the am/duong => am														// la xuat hang, duong la nhap hang
+		invoice.setPrice(invoice.getPrice());
 		// save invoice ben jsp vao DAO
 		invoiceDAO.update(invoice);
 		historyService.save(invoice, Constant.ACTION_EDIT);
-		productInStockService.saveOrUpdate(invoice2);
+		productInStockService.saveOrUpdate(invoice);
 	}
 
 	public List<Invoice> find(String property, Object value) {
