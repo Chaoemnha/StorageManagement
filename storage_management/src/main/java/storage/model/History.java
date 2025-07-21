@@ -43,7 +43,10 @@ public class History {
     private User user;
     
     // Constructors, getters, setters, and lifecycle methods...
-    public History() {}
+    public History() {
+    	this.productInfo = new ProductInfo();
+    	this.productInfo.setCategory(new Category());
+    }
     
     public History(String actionName, Integer type, ProductInfo productInfo, 
                    Integer qty, BigDecimal price, Integer activeFlag, User user) {
