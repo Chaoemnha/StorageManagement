@@ -16,7 +16,7 @@
 				<div class="container">
 					<form:form modelAttribute="searchForm"
 						cssClass="form-horizontal form-label-left"
-						servletRelativeAction="/goods-receipt/list/1" method="POST">
+						servletRelativeAction="/category/list/1" method="POST">
 						<div class="form-group">
 							<div class="row">
 								<label for="id" class="control-label col-md-3 col-sm-3 col-12">ID</label>
