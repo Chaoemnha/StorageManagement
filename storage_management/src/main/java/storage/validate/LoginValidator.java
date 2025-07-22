@@ -11,6 +11,7 @@ import org.springframework.validation.Validator;
 
 import storage.model.User;
 import storage.service.UserService;
+import storage.util.HashingPassword;
 @Component
 public class LoginValidator implements Validator{
 	@Autowired
@@ -26,8 +27,13 @@ public class LoginValidator implements Validator{
 		if(StringUtils.hasLength(user.getUserName())&& StringUtils.hasLength(user.getPassword())) {
 			List<User> users = userService.findByProperty("userName", user.getUserName());
 			if(users!=null && !users.isEmpty()) {
-				if(!users.get(0).getPassword().equals(user.getPassword())) {
-					errors.rejectValue("password", "msg.wrong.password");
+				try {
+					if(!HashingPassword.decrypt(users.get(0).getPassword()).equals(user.getPassword())) {
+						errors.rejectValue("password", "msg.wrong.password");
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 			}
 				else {
