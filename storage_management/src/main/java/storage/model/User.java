@@ -46,10 +46,11 @@ public class User {
     @Column(name = "AVATAR", length = 255)
     private String avatar;
     
+    private Integer roleId;
     // Constructors
     public User() {}
     
-    public User(String userName, String password, String email, String name, String avatar, Integer activeFlag) {
+    public User(String userName, String password, String email, String name, String avatar, Integer activeFlag, Integer roleId) {
         this.userName = userName;
         this.password = password;
         this.email = email;
@@ -58,6 +59,7 @@ public class User {
         this.avatar = avatar;
         this.createDate = new Timestamp(System.currentTimeMillis());
         this.updateDate = new Timestamp(System.currentTimeMillis());
+        this.roleId = roleId;
     }
     
     // Getters and Setters
@@ -69,7 +71,15 @@ public class User {
         this.id = id;
     }
     
-    public String getUserName() {
+    public Integer getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(Integer roleId) {
+		this.roleId = roleId;
+	}
+
+	public String getUserName() {
         return userName;
     }
     
