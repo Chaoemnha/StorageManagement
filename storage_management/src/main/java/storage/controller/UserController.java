@@ -67,7 +67,7 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/user/list/{page}")
-	public String showUsersList(Model model, HttpSession session, @ModelAttribute("searchForm") User user,
+	public String showUserList(Model model, HttpSession session, @ModelAttribute("searchForm") User user,
 			@PathVariable("page") int page) {
 		Paging paging = new Paging(5);
 		paging.setIndexPage(page);
@@ -87,7 +87,7 @@ public class UserController {
 
 	@GetMapping("/user/add")
 	public String add(Model model) {
-		model.addAttribute("titlePage", "Add Users");
+		model.addAttribute("titlePage", "Add User");
 		model.addAttribute("modelForm", new User());
 		List<Role> roles = roleService.getRoleList(null, null);
 		Map<String, String> mapRole = new HashMap<String, String>();
@@ -113,10 +113,9 @@ public class UserController {
 			UserRole userRole = (UserRole) user.getUserRoles().iterator().next();
 			user.setRoleId(userRole.getRole().getId());
 			model.addAttribute("mapRole", mapRole);
-			model.addAttribute("titlePage", "Edit Users");
+			model.addAttribute("titlePage", "Edit User");
 			model.addAttribute("modelForm", user);
 			model.addAttribute("viewOnly", false);
-			model.addAttribute("editMode", true);
 			return "user-action";
 		}
 		return "redirect:/user/list";
@@ -136,10 +135,9 @@ public class UserController {
 			}
 			Map<String, String> mapRole = new HashMap<>();
 			model.addAttribute("mapRole", mapRole);
-			model.addAttribute("titlePage", "View Users");
+			model.addAttribute("titlePage", "View User");
 			model.addAttribute("modelForm", user);
 			model.addAttribute("viewOnly", true);
-			model.addAttribute("editMode", true);
 			return "user-action";
 		}
 		return "redirect:/user/list";
@@ -150,10 +148,9 @@ public class UserController {
 			HttpSession session) {
 		if (result.hasErrors()) {
 			if (user.getId() != null) {
-				model.addAttribute("titlePage", "Edit Users");
-				model.addAttribute("editMode", true);
+				model.addAttribute("titlePage", "Edit User");
 			} else {
-				model.addAttribute("titlePage", "Add Users");
+				model.addAttribute("titlePage", "Add User");
 			}
 			List<Role> roles = roleService.getRoleList(null, null);
 			Map<String, String> mapRole = new HashMap<>();
