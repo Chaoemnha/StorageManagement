@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 
 import storage.dto.AuthDTO;
 import storage.dto.RoleDTO;
@@ -25,7 +24,6 @@ import storage.dto.UserRoleDTO;
 import storage.model.Menu;
 import storage.model.Role;
 import storage.model.User;
-import storage.model.UserRole;
 import storage.service.RoleService;
 import storage.service.UserRoleService;
 import storage.service.UserService;
