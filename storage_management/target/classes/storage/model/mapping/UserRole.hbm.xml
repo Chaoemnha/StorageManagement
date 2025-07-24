@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="storage.model">
+    <class name="UserRole" table="user_role">
+        <id name="id" column="ID" type="java.lang.Integer">
+            <generator class="identity"/>
+        </id>
+        
+        <!-- Many-to-One relationships -->
+        <many-to-one name="user" column="USER_ID" class="User" not-null="true" lazy="proxy"/>
+        <many-to-one name="role" column="ROLE_ID" class="Role" not-null="true" lazy="proxy"/>
+        
+        <property name="activeFlag" column="ACTIVE_FLAG" type="java.lang.Integer" not-null="true"/>
+        <property name="createDate" column="CREATE_DATE" type="timestamp"/>
+        <property name="updateDate" column="UPDATE_DATE" type="timestamp"/>
+    </class>
+</hibernate-mapping>
