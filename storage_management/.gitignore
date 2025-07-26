@@ -1,0 +1,41 @@
+# Maven
+target/
+*.war
+*.jar
+*.ear
+.m2/
+
+# Eclipse
+.classpath
+.project
+.settings/
+.metadata/
+*.prefs
+.jsdtscope
+
+# Logs
+*.log
+logs/
+
+# IDE-specific
+*.swp
+*.swo
+*~
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Other temporary files
+*.tmp
+*.bak
+*.swp
+*.class
+
+# Personal files
+tips.txt
+
+# Local configuration (optional, if sensitive)
+config.properties
+jdbc.properties
+hibernate.properties
