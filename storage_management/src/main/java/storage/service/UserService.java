@@ -10,8 +10,8 @@ import storage.dao.UserDAO;
 import storage.model.User;
 
 @Service
-public class UserServicce {
-	final static Logger log = Logger.getLogger(UserServicce.class);
+public class UserService {
+	final static Logger log = Logger.getLogger(UserService.class);
 	@Autowired
 	private UserDAO<User> userDAO;
 	public List<User> findByProperty(String property, Object value) {

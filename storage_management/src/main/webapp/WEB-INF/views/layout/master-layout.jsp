@@ -11,7 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Gentelella Alela! | </title>
+    <title>Asura Storage Management! | </title>
 
     <!-- Bootstrap -->
     <!-- Dinh nghia cac duong dan header bang the c:url, la 1 cong dung cua jstl -->
@@ -48,7 +48,7 @@
                         </div>
                         <div class="profile_info">
                             <span>Welcome,</span>
-                            <h2>Luan Nguyen</h2>
+                            <h2>${userInfo.name}</h2>
                         </div>
                     </div>
                     <!-- /menu profile quick info -->
