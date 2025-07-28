@@ -121,4 +121,11 @@ public class Category {
     protected void onUpdate() {
         updateDate = new Timestamp(System.currentTimeMillis());
     }
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "Name = "+name+" Code = "+code+" description = "+description;
+	}
+    
 }
