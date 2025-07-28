@@ -9,4 +9,7 @@
 </definition>
 <!-- Thanh phan chinh la index con ke thua them master o tren -->
 <definition name="index" extends="master">
-<put-attribute name="body" value="/WEB-INF/views/index.jsp"></put-attribute></definition></tiles-definitions>
+        <put-attribute name="body" value="/WEB-INF/views/index.jsp"/>
+    </definition>
+    <definition name="access-denied" template="/WEB-INF/views/error-page/access-denied.jsp"/>
+</tiles-definitions>

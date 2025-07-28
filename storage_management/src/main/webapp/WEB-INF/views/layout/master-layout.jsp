@@ -44,7 +44,7 @@
                     <div class="profile clearfix">
                         <div class="profile_pic">
                             <!-- Tat ca cac url deu p thay bang c:url <img src="images/img.jpg" alt="..." class="img-circle profile_img"> -->
-                            <img src="<c:url value='/images/user.png'/>" alt="..." class="img-circle profile_img">
+                            <img src="https://gravatar.com/avatar/${userInfo.avatar}" alt="..." class="img-circle profile_img">
                         </div>
                         <div class="profile_info">
                             <span>Welcome,</span>
@@ -70,7 +70,7 @@
                         <a data-toggle="tooltip" data-placement="top" title="Lock">
                             <span class="fa fa-eye-slash" aria-hidden="true"></span>
                         </a>
-                        <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+                        <a data-toggle="tooltip" data-placement="top" title="Logout" href="<c:url value="/logout"></c:url>">
                             <span class="fa fa-power-off" aria-hidden="true"></span>
                         </a>
                     </div>

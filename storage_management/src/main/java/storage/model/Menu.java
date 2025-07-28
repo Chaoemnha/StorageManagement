@@ -2,6 +2,7 @@ package storage.model;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -36,6 +37,10 @@ public class Menu {
     
     @OneToMany(mappedBy = "menu", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Auth> auths;
+    
+    private List<Menu> child;
+    
+    private String idMenu;
     
     // Constructors
     public Menu() {}
@@ -78,7 +83,23 @@ public class Menu {
     public Set<Auth> getAuths() { return auths; }
     public void setAuths(Set<Auth> auths) { this.auths = auths; }
     
-    @PrePersist
+    public List<Menu> getChild() {
+		return child;
+	}
+
+	public void setChild(List<Menu> child) {
+		this.child = child;
+	}
+
+	public String getIdMenu() {
+		return idMenu;
+	}
+
+	public void setIdMenu(String idMenu) {
+		this.idMenu = idMenu;
+	}
+
+	@PrePersist
     protected void onCreate() {
         createDate = new Timestamp(System.currentTimeMillis());
         updateDate = new Timestamp(System.currentTimeMillis());

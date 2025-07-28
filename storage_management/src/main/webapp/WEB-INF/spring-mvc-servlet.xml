@@ -88,4 +88,14 @@
 	</bean>
 	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 	<property name="basename" value="/message/message"></property></bean>
+	<!-- Khai bao bean di qua moi path tru login, /processLogin, /res... -->
+<mvc:interceptors>
+    <mvc:interceptor>
+        <mvc:mapping path="/**/" />
+        <mvc:exclude-mapping path="/login" />
+        <mvc:exclude-mapping path="/processLogin" />
+        <mvc:exclude-mapping path="/resources/**" />
+        <bean class="storage.security.FilterSystem" />
+    </mvc:interceptor>
+</mvc:interceptors>
 </beans>

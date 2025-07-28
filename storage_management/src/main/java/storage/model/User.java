@@ -43,15 +43,19 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<History> histories;
     
+    @Column(name = "AVATAR", length = 255)
+    private String avatar;
+    
     // Constructors
     public User() {}
     
-    public User(String userName, String password, String email, String name, Integer activeFlag) {
+    public User(String userName, String password, String email, String name, String avatar, Integer activeFlag) {
         this.userName = userName;
         this.password = password;
         this.email = email;
         this.name = name;
         this.activeFlag = activeFlag;
+        this.avatar = avatar;
         this.createDate = new Timestamp(System.currentTimeMillis());
         this.updateDate = new Timestamp(System.currentTimeMillis());
     }
@@ -145,7 +149,15 @@ public class User {
         this.histories = histories;
     }
     
-    @PrePersist
+    public String getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
+
+	@PrePersist
     protected void onCreate() {
         createDate = new Timestamp(System.currentTimeMillis());
         updateDate = new Timestamp(System.currentTimeMillis());
