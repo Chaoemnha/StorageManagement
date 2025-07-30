@@ -42,4 +42,14 @@ public class ProductService {
 		LOGGER.info("property ="+property+" value"+object.toString());
 		return categoryDAO.findByProperty(property, object);
 	}
+	
+	public List<Category> getAll() {
+		LOGGER.info("show all category");
+		return categoryDAO.findAll();
+	}
+	
+	public Category findByIdCategory(int id) {
+		LOGGER.info("find category by id ="+id);
+		return categoryDAO.findById(Category.class, id);
+	}
 }
