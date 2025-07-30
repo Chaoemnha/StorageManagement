@@ -14,15 +14,15 @@
     <title>Gentelella Alela! | </title>
 
     <!-- Bootstrap -->
-    <link href="<c:url value="/resources/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<c:url value="/resources/vendors/bootstrap/dist/css/bootstrap.min.css"/>" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="<c:url value="/resources/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="<c:url value="/resources/vendors/font-awesome/css/font-awesome.min.css"/>" rel="stylesheet">
     <!-- NProgress -->
-    <link href="<c:url value="/resources/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <link href="<c:url value="/resources/vendors/nprogress/nprogress.css"/>" rel="stylesheet">
 
     <!-- Custom Theme Style -->
-    <link href="<c:url value="/resources/build/css/custom.css" rel="stylesheet">
-    <link href="<c:url value="/resources/build/css/style-extra-bs4.css" rel="stylesheet">
+    <link href="<c:url value="/resources/build/css/custom.css"/>" rel="stylesheet">
+    <link href="<c:url value="/resources/build/css/style-extra-bs4.css"/>" rel="stylesheet">
   </head>
 
   <body class="nav-md">
@@ -37,28 +37,25 @@
               <h2>Access denied</h2>
               <p>Full authentication is required to access this resource. <a href="#">Report this?</a>
                   </div>
-                </form>
               </div>
             </div>
           </div>
         </div>
         <!-- /page content -->
         </div>
-      </div>
-    </div>
 
     <!-- jQuery -->
-    <script src="<c:url value="/resources/vendors/jquery/dist/jquery.min.js"></script>
+    <script src="<c:url value="/resources/vendors/jquery/dist/jquery.min.js"/>"></script>
     <!-- Popper -->
-    <script src="<c:url value="/resources/vendors/popper/popper.min.js"></script>
+    <script src="<c:url value="/resources/vendors/popper/popper.min.js"/>"></script>
     <!-- Bootstrap -->
-    <script src="<c:url value="/resources/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="<c:url value="/resources/vendors/bootstrap/dist/js/bootstrap.min.js"/>"></script>
     <!-- FastClick -->
-    <script src="<c:url value="/resources/vendors/fastclick/lib/fastclick.js"></script>
+    <script src="<c:url value="/resources/vendors/fastclick/lib/fastclick.js"/>"></script>
     <!-- NProgress -->
-    <script src="<c:url value="/resources/vendors/nprogress/nprogress.js"></script>
+    <script src="<c:url value="/resources/vendors/nprogress/nprogress.js"/>"></script>
 
     <!-- Custom Theme Scripts -->
-    <script src="<c:url value="/resources/build/js/custom.min.js"></script>
+    <script src="<c:url value="/resources/build/js/custom.min.js"/>"></script>
   </body>
 </html>

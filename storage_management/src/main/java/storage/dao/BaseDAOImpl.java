@@ -50,7 +50,9 @@ public class BaseDAOImpl<E> implements BaseDAO<E> {
 	@Override
 	public void save(E instance) {
 		log.info("save instance");
+		E debug = instance;
 		sessionFactory.getCurrentSession().persist(instance);
+		sessionFactory.getCurrentSession().flush();
 	}
 
 	@Override
