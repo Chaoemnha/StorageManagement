@@ -19,7 +19,9 @@
     <!-- Font Awesome -->
     <link href="<c:url value='/resources/vendors/font-awesome/css/font-awesome.min.css'/>" rel="stylesheet">
     <!-- NProgress -->
-    <link href="<c:url value='/resources/vendors/nprogress/nprogress.css'/>" rel="stylesheet">
+    <link href="<c:url value='/resources/vendors/pnotify/dist/pnotify.css'/>" rel="stylesheet">
+    <link href="<c:url value='/resources/vendors/pnotify/dist/pnotify.buttons.css'/>" rel="stylesheet">
+    <link href="<c:url value='/resources/vendors/pnotify/dist/pnotify.nonblock.css'/>" rel="stylesheet">
     <!-- jQuery custom content scroller -->
     <link href="<c:url value='/resources/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css'/>" rel="stylesheet"/>
 
@@ -86,7 +88,7 @@
                     <!-- page content -->
                     <tiles:insertAttribute name="body"></tiles:insertAttribute>
                     <!-- /page content -->
-
+aw
                     <!-- footer content -->
                     <tiles:insertAttribute name="footer"></tiles:insertAttribute>
                     <!-- /footer content -->
@@ -106,10 +108,29 @@
 <script src="<c:url value='/resources/vendors/fastclick/lib/fastclick.js'/>"></script>
 <!-- NProgress -->
 <script src="<c:url value='/resources/vendors/nprogress/nprogress.js'/>"></script>
-<!-- jQuery custom content scroller -->
+<!-- jQuery custom content scroller --l
 <script src="<c:url value='/resources/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js'/>"></script>
+<!-- PNotify -->
+
+<script src="<c:url value='/resources/vendors/pnotify/dist/pnotify.nonblock.js'/>"></script>
+<script src="<c:url value='/resources/vendors/pnotify/dist/pnotify.js'/>"></script>
+<script src="<c:url value='/resources/vendors/pnotify/dist/pnotify.buttons.js'/>"></script>
+
 
 <!-- Custom Theme Scripts -->
 <script src="<c:url value='/resources/build/js/custom.min.js'/>"></script>
+<script>
+  const observer = new MutationObserver(mutations => {
+    mutations.forEach(mutation => {
+      mutation.addedNodes.forEach(node => {
+        if (node.nodeType === 1 && node.classList.contains('dark')) {
+          node.remove();
+        }
+      });
+    });
+  });
+
+  observer.observe(document.body, { childList: true, subtree: true });
+</script>
 </body>
 </html>
