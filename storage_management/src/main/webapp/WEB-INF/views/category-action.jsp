@@ -17,7 +17,6 @@
                                             <br/>
 												<form:form modelAttribute="modelForm" cssClass="form-horizontal form-label-left" servletRelativeAction="/category/save" method="POST">
                                                 <form:hidden path="id"/>
-                                                <form:hidden path="createDate"/>
                                                 <form:hidden path="activeFlag"/>
                                                 <div class="form-group">
                                                     <div class="row">
