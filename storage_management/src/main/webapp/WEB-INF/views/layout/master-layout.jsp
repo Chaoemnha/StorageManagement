@@ -118,7 +118,7 @@ aw
 
 
 <!-- Custom Theme Scripts -->
-<script src="<c:url value='/resources/build/js/custom.min.js'/>"></script>
+<script src="<c:url value='/resources/build/js/custom.js'/>"></script>
 <script>
   const observer = new MutationObserver(mutations => {
     mutations.forEach(mutation => {

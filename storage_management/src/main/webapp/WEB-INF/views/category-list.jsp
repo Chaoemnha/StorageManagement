@@ -13,7 +13,7 @@
 
                                         <div class="x_content">
 											<div class="container">
-											<form:form modelAttribute="searchForm" cssClass="form-horizontal form-label-left" servletRelativeAction="/category/list" method="POST">
+											<form:form modelAttribute="searchForm" cssClass="form-horizontal form-label-left" servletRelativeAction="/category/list/1" method="POST">
                                                 <div class="form-group">
                                                     <div class="row">
                                                         <label for="middle-name"
@@ -74,7 +74,7 @@
                                                     <c:choose>
                                                     <c:when test="${loop.index%2==0 }"><tr class="even pointer"></c:when>
                                                     <c:otherwise><tr class="odd pointer"></c:otherwise></c:choose>
-                                                        <td class=" ">${loop.index+1 }</td>
+                                                        <td class=" ">${pageInfo.getOffset()+loop.index+1 }</td>
                                                         <td class=" ">${category.id }</td>
                                                         <td class=" ">${category.code }</td>
                                                         <td class=" ">${category.name }</td>
@@ -91,6 +91,7 @@
                                                     </tr></c:forEach>
                                                     </tbody>
                                                 </table>
+                                                <jsp:include page="./layout/paging.jsp"></jsp:include>
                                             </div>
 
 
@@ -106,7 +107,10 @@
       window.location.href = baseUrl + id;
     }
   }
-
+	function gotoPage(page){
+		document.getElementById('searchForm').action = '<c:url value=""/>' + page;
+		document.getElementById("searchForm").submit();
+	}
   document.addEventListener("DOMContentLoaded", function () {
 	    processMessage();
 	});
