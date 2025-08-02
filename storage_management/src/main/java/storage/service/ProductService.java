@@ -14,13 +14,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import storage.dao.CategoryDAO;
+import storage.dao.ProductInfoDAO;
 import storage.model.Category;
 import storage.model.Paging;
+import storage.model.ProductInfo;
 
 @Service
 public class ProductService {
 	@Autowired
 	private CategoryDAO<Category> categoryDAO;
+	@Autowired
+	private ProductInfoDAO<ProductInfo> productInfoDAO;
 	private static final Logger LOGGER = Logger.getLogger(ProductService.class);
 	public void save(Category category) {
 		LOGGER.info("Insert category " + category.toString());
@@ -31,6 +35,7 @@ public class ProductService {
 	}
 	
 	public void updateCategory(Category category) {
+		LOGGER.info("Update category "+category.toString());
 		category.setUpdateDate(new Timestamp(new Date().getTime()));
 		categoryDAO.update(category);
 	}
@@ -47,7 +52,7 @@ public class ProductService {
 		return categoryDAO.findByProperty(property, object);
 	}
 	
-	public List<Category> getAll(Category category, Paging paging) {
+	public List<Category> getAllCategory(Category category, Paging paging) {
 		LOGGER.info("show all category");
 		StringBuilder queryStr = new StringBuilder();
 		Map<String, Object> mapParams = new HashMap<String, Object>();
@@ -72,5 +77,61 @@ public class ProductService {
 	public Category findByIdCategory(int id) {
 		LOGGER.info("find category by id ="+id);
 		return categoryDAO.findById(Category.class, id);
+	}
+	
+	//PRODUCT INFO
+	
+	public void saveProductInfo(ProductInfo productInfo) {
+		LOGGER.info("Insert productInfo " + productInfo.toString());
+		productInfo.setActiveFlag(1);
+		productInfo.setCreateDate(new Timestamp(new Date().getTime()));
+		productInfo.setUpdateDate(new Timestamp(new Date().getTime()));
+		productInfo.setImgUrl("/upload/"+productInfo.getMultipartFile().getOriginalFilename());
+		productInfoDAO.save(productInfo);
+	}
+	
+	public void updateProductInfo(ProductInfo productInfo) {
+		LOGGER.info("Update productInfo "+productInfo.toString());
+		productInfo.setUpdateDate(new Timestamp(new Date().getTime()));
+		productInfoDAO.update(productInfo);
+	}
+	
+	public void deleteProductInfo(ProductInfo productInfo) {
+		productInfo.setActiveFlag(0);
+		LOGGER.info("Delete productInfo "+productInfo.toString());
+		productInfoDAO.update(productInfo);
+	}
+	
+	public List<ProductInfo> findProductInfo(String property, Object object) {
+		LOGGER.info("====Find by property productInfo start====");
+		LOGGER.info("property ="+property+" value"+object.toString());
+		return productInfoDAO.findByProperty(property, object);
+	}
+	
+	public List<ProductInfo> getAllProductInfo(ProductInfo productInfo, Paging paging) {
+		LOGGER.info("show all productInfo");
+		StringBuilder queryStr = new StringBuilder();
+		Map<String, Object> mapParams = new HashMap<String, Object>();
+		if(productInfo!=null) {
+			if(productInfo.getId()!=null&&productInfo.getId()!=0) {
+				queryStr.append(" and model.id=:id");
+				mapParams.put("id", productInfo.getId());
+			}
+			//Kiem tra ca rong thi cta cx ko xly
+			if(productInfo.getCode()!=null&&StringUtils.hasLength(productInfo.getCode())) {
+				queryStr.append(" and model.code=:code");
+				mapParams.put("code", productInfo.getCode());
+			}
+			if(productInfo.getName()!=null&&StringUtils.hasLength(productInfo.getName())) {
+				queryStr.append(" and model.name like :name");
+				mapParams.put("name", "%"+productInfo.getName()+"%");
+			}
+		}
+		return productInfoDAO.findAll(queryStr.toString(), mapParams, paging);
+	}
+	
+	public ProductInfo findByIdProductInfo(int id) {
+		LOGGER.info("find productInfo by id ="+id);
+		return productInfoDAO.findById(ProductInfo.class, id);
 	}
 }

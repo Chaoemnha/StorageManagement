@@ -53,7 +53,7 @@ public class CategoryController {
 	public String showCategoryList(Model model, HttpSession httpSession, @ModelAttribute("searchForm") Category category, @PathVariable("page") int page) {
 		Paging paging = new Paging(3);
 		paging.setIndexPage(page);
-		List<Category> categories = productService.getAll(category, paging);
+		List<Category> categories = productService.getAllCategory(category, paging);
 	     if (httpSession.getAttribute(Constant.MSG_SUCCESS) != null) {
 	         model.addAttribute(Constant.MSG_SUCCESS, httpSession.getAttribute(Constant.MSG_SUCCESS));
 	         httpSession.removeAttribute(Constant.MSG_SUCCESS);
