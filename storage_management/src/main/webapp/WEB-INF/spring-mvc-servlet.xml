@@ -12,14 +12,23 @@
 
 	<!-- Quét các bean trong package -->
 	<context:component-scan base-package="storage" />
-	<context:property-placeholder
-		location="classpath:jdbc.properties" />
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath: jdbc.properties</value>
+				<value>classpath: config.properties</value>
+			</list>
+		</property>
+	</bean>
 	<!-- Kích hoạt annotation-driven -->
 	<mvc:annotation-driven />
 
 	<!-- Cấu hình resource handler -->
 	<mvc:resources location="/static/"
 		mapping="/resources/**" />
+	<mvc:resources location="/file:/${upload.servlet.location}"
+		mapping="/upload/**" />
 
 	<!-- Cấu hình ViewResolver -->
 	<bean
