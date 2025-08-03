@@ -65,7 +65,16 @@ public class ProductInfo {
         this.createDate = new Timestamp(System.currentTimeMillis());
         this.updateDate = new Timestamp(System.currentTimeMillis());
     }
-    
+    public Integer getCateId() {
+        return category != null ? category.getId() : null;
+    }
+
+    public void setCateId(Integer cateId) {
+        if (category == null) {
+            category = new Category();
+        }
+        category.setId(cateId);
+    }
     // Getters and Setters
     public Integer getId() {
         return id;

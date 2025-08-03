@@ -28,7 +28,9 @@ public class ProductInfoValidator implements Validator{
 		ValidationUtils.rejectIfEmpty(errors, "code", "msg.required");
 		ValidationUtils.rejectIfEmpty(errors, "name", "msg.required");
 		ValidationUtils.rejectIfEmpty(errors, "description", "msg.required");
-		ValidationUtils.rejectIfEmpty(errors, "multipartFile", "msg.required");
+		if(productInfo.getId()!=null) {
+			ValidationUtils.rejectIfEmpty(errors, "multipartFile", "msg.required");
+		}
 		if(productInfo.getCode()!=null) {
 		List<ProductInfo> result =  productService.findProductInfo("code", productInfo.getCode());
 		if(productInfo.getId()!=null && productInfo.getId()!=0)
@@ -39,7 +41,7 @@ public class ProductInfoValidator implements Validator{
 		}
 		if(productInfo.getMultipartFile()!=null) {
 			String extension = FilenameUtils.getExtension(productInfo.getMultipartFile().getOriginalFilename());
-			if(!extension.equals("jpg")||!extension.equals("png")) {
+			if(!extension.equals("jpg")&&!extension.equals("png")) {
 				errors.rejectValue("multipartFile", "msg.file.extension.error");
 			}
 		}
