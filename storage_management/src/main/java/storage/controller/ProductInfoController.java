@@ -56,7 +56,7 @@ public class ProductInfoController {
 	public String showProductInfoList(Model model, HttpSession httpSession, @ModelAttribute("searchForm") ProductInfo productInfo, @PathVariable("page") int page) {
 		Paging paging = new Paging(3);
 		paging.setIndexPage(page);
-		List<ProductInfo> categories = productService.getAllProductInfo(productInfo, paging);
+		List<ProductInfo> products = productService.getAllProductInfo(productInfo, paging);
 	     if (httpSession.getAttribute(Constant.MSG_SUCCESS) != null) {
 	         model.addAttribute(Constant.MSG_SUCCESS, httpSession.getAttribute(Constant.MSG_SUCCESS));
 	         httpSession.removeAttribute(Constant.MSG_SUCCESS);
@@ -67,7 +67,7 @@ public class ProductInfoController {
 			httpSession.removeAttribute(Constant.MSG_ERROR);
 		}
 		model.addAttribute("pageInfo", paging);
-		model.addAttribute("categories",categories);
+		model.addAttribute("products",products);
 		return "productInfo-list";
 	}
 	

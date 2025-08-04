@@ -6,14 +6,14 @@
                         <div class="">
                                     <div class="x_panel">
                                         <div class="x_title">
-                                            <h2>Category List
+                                            <h2>Product Info List
                                             </h2>
                                             <div class="clearfix"></div><a class="btn btn-app" href="<c:url value="/product-info/add"/>"><i class="fa fa-plus"></i>Add</a>
                                         </div>
 
                                         <div class="x_content">
 											<div class="container">
-											<form:form modelAttribute="searchForm" cssClass="form-horizontal form-label-left" servletRelativeAction="/category/list/1" method="POST">
+											<form:form modelAttribute="searchForm" cssClass="form-horizontal form-label-left" servletRelativeAction="/product-info/list/1" method="POST">
                                                 <div class="form-group">
                                                     <div class="row">
                                                         <label for="middle-name"
@@ -46,7 +46,7 @@
                                                 <div class="form-group">
                                                     <div class="row">
                                                         <div class="col-md-6 col-sm-6 col-12 col-md-offset-3">
-                                                            <button type="submit" class="btn btn-success">Submit
+                                                            <button type="submit" class="btn btn-success">Search
                                                             </button>
                                                         </div>
                                                     </div>
@@ -62,7 +62,7 @@
                                                         <th class="column-title">ID</th>
                                                         <th class="column-title">Code</th>
                                                         <th class="column-title">Name</th>
-                                                        <th class="column-title">Description</th>
+                                                        <th class="column-title">Image</th>
                                                         <th class="column-title no-link last text-center" colspan="3"><span
                                                                 class="nobr">Action</span>
                                                         </th>
@@ -70,20 +70,20 @@
                                                     </thead>
 
                                                     <tbody>
-                                                    <c:forEach items="${categories}" var="category" varStatus="loop">
+                                                    <c:forEach items="${products}" var="product" varStatus="loop">
                                                     <c:choose>
                                                     <c:when test="${loop.index%2==0 }"><tr class="even pointer"></c:when>
                                                     <c:otherwise><tr class="odd pointer"></c:otherwise></c:choose>
                                                         <td class=" ">${pageInfo.getOffset()+loop.index+1 }</td>
-                                                        <td class=" ">${category.id }</td>
-                                                        <td class=" ">${category.code }</td>
-                                                        <td class=" ">${category.name }</td>
-                                                        <td class=" ">${category.description }</td>
+                                                        <td class=" ">${product.id }</td>
+                                                        <td class=" ">${product.code }</td>
+                                                        <td class=" ">${product.name }</td>
+                                                        <td class=" "><img src="<c:url value="${product.imgUrl}"/>" width="100px" height="100px"/></td>
                                                         
-                                                        <td><a href="<c:url value="/product-info/view/${category.id }"/>" class="btn btn-round btn-info">View</a></td>
-                                                        <td><a href="<c:url value="/product-info/edit/${category.id }"/>" class="btn btn-round btn-primary">Edit</a></td>
+                                                        <td><a href="<c:url value="/product-info/view/${product.id }"/>" class="btn btn-round btn-info">View</a></td>
+                                                        <td><a href="<c:url value="/product-info/edit/${product.id }"/>" class="btn btn-round btn-primary">Edit</a></td>
                                                         <td>
-  <a href="javascript:void(0)" onclick="confirmDelete(${category.id})" class="btn btn-round btn-danger">
+  <a href="javascript:void(0)" onclick="confirmDelete(${product.id})" class="btn btn-round btn-danger">
     Delete
   </a>
 </td>

@@ -90,16 +90,18 @@ public class ProductService {
 		productInfo.setActiveFlag(1);
 		productInfo.setCreateDate(new Timestamp(new Date().getTime()));
 		productInfo.setUpdateDate(new Timestamp(new Date().getTime()));
-		processUploadFile(productInfo.getMultipartFile());
-		productInfo.setImgUrl("/upload/"+System.currentTimeMillis()+"_"+productInfo.getMultipartFile().getOriginalFilename());
+		String fileName = System.currentTimeMillis()+"_"+productInfo.getMultipartFile().getOriginalFilename();
+		processUploadFile(productInfo.getMultipartFile(), fileName);
+		productInfo.setImgUrl("/upload/"+fileName);
 		productInfoDAO.save(productInfo);
 	}
 	
 	public void updateProductInfo(ProductInfo productInfo) throws IllegalStateException, IOException {
 		LOGGER.info("Update productInfo "+productInfo.toString());
 		productInfo.setUpdateDate(new Timestamp(new Date().getTime()));
-		processUploadFile(productInfo.getMultipartFile());
-		if(productInfo.getMultipartFile()!=null) {
+		if(!productInfo.getMultipartFile().getOriginalFilename().isEmpty()) {
+			String fileName = System.currentTimeMillis()+"_"+productInfo.getMultipartFile().getOriginalFilename();
+			processUploadFile(productInfo.getMultipartFile(), fileName);
 			productInfo.setImgUrl("/upload/"+productInfo.getMultipartFile().getOriginalFilename());
 		}
 		productInfoDAO.update(productInfo);
@@ -144,13 +146,13 @@ public class ProductService {
 		return productInfoDAO.findById(ProductInfo.class, id);
 	}
 	
-	private void processUploadFile(MultipartFile multipartFile) throws IllegalStateException, IOException {
-		if(multipartFile!=null) {
+	private void processUploadFile(MultipartFile multipartFile, String fileName) throws IllegalStateException, IOException {
+		//Thong nhat file name, tranh chenh lenh vai mili giay
+		if(!multipartFile.getOriginalFilename().isEmpty()) {
 			File dir = new File(ConfigLoader.getInstance().getValue("upload.location"));
 			if(!dir.exists()) {
 				dir.mkdirs();
 			}
-			String fileName = System.currentTimeMillis()+"_"+multipartFile.getOriginalFilename();
 			File file = new File(ConfigLoader.getInstance().getValue("upload.location"), fileName);
 			multipartFile.transferTo(file);
 		}
