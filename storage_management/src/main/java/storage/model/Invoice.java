@@ -37,6 +37,10 @@ public class Invoice {
     
     @Column(name = "UPDATE_DATE")
     private Timestamp updateDate;
+    //Them from to de search tu ngay nay den ngay nay
+    private Timestamp fromDate;
+    
+    private Timestamp toDate;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID")
@@ -67,7 +71,23 @@ public class Invoice {
         this.id = id;
     }
     
-    public String getCode() {
+    public Timestamp getFromDate() {
+		return fromDate;
+	}
+
+	public void setFromDate(Timestamp fromDate) {
+		this.fromDate = fromDate;
+	}
+
+	public Timestamp getToDate() {
+		return toDate;
+	}
+
+	public void setToDate(Timestamp toDate) {
+		this.toDate = toDate;
+	}
+
+	public String getCode() {
         return code;
     }
     
