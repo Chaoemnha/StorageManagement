@@ -58,7 +58,7 @@ public class ProductInStockService {
 				LOGGER.info("update qty="+invoice.getQty()+" and price="+invoice.getPrice());
 				productInStock.setQty(productInStock.getQty()+invoice.getQty());
 				//Neu nhap hang thi moi cap nhat gia
-				if(invoice.getType()==Constant.INVOICE_TYPE)
+				if(invoice.getType()==Constant.TYPE_GOODS_RECEIPT)
 					productInStock.setPrice(invoice.getPrice());
 				productInStock.setUpdateDate(new Timestamp(new Date().getTime()));
 				productInStockDAO.update(productInStock);

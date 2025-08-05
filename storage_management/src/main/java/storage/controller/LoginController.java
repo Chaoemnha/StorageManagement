@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import storage.dto.AuthDTO;
 import storage.dto.RoleDTO;
 import storage.dto.UserRoleDTO;
-import storage.model.Auth;
 import storage.model.Menu;
 import storage.model.Role;
 import storage.model.User;
