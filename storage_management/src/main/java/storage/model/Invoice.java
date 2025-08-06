@@ -42,6 +42,8 @@ public class Invoice {
     
     private Timestamp toDate;
     
+    private Integer productId;
+    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID")
     private User user;
@@ -71,7 +73,15 @@ public class Invoice {
         this.id = id;
     }
     
-    public Timestamp getFromDate() {
+    public Integer getProductId() {
+		return productId;
+	}
+
+	public void setProductId(Integer productId) {
+		this.productId = productId;
+	}
+
+	public Timestamp getFromDate() {
 		return fromDate;
 	}
 

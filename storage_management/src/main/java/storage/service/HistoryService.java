@@ -45,7 +45,7 @@ public class HistoryService {
 				queryStr.append(" and model.actionName like actionName"); 
 				mapParams.put("actionName", "%"+history.getActionName()+"%");
 			}
-			if(history.getType()!=0) {
+			if(history.getType()!=null&&history.getType()!=0) {
 				queryStr.append(" and model.type = :type");
 				mapParams.put("type", history.getType());
 			}

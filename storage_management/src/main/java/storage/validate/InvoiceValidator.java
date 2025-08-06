@@ -36,10 +36,10 @@ public class InvoiceValidator implements Validator {
 				if (invoice.getId() != null && invoice.getId() != 0) {
 					// neu ton tai id invoice trong db trung voi id invoice dang nhap => trung code
 					if (results.get(0).getId() != invoice.getId()) {
-						errors.rejectValue("code", "msg.code.exist");
+						errors.rejectValue("code", "msg.code.exists");
 					}
 				} else {
-					errors.rejectValue("code", "msg.code.exist");
+					errors.rejectValue("code", "msg.code.exists");
 				}
 			}
 		}

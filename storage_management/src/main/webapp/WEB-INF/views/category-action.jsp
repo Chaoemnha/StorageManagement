@@ -21,7 +21,7 @@
                                                 <div class="form-group">
                                                     <div class="row">
                                                         <label class="control-label col-md-3 col-sm-3 col-12"
-                                                               for="first-name">Code <span class="required">*</span>
+                                                               for="code">Code <span class="required">*</span>
                                                         </label>
                                                         <div class="col-md-6 col-sm-6 col-12">
 									                        <form:input type="text" class="form-control" placeholder="Code..." path="code" disabled="${viewOnly}"/>
@@ -33,7 +33,7 @@
                                                 <div class="form-group">
                                                     <div class="row">
                                                         <label class="control-label col-md-3 col-sm-3 col-12"
-                                                               for="last-name">Name <span class="required">*</span>
+                                                               for="name">Name <span class="required">*</span>
                                                         </label>
                                                         <div class="col-md-6 col-sm-6 col-12">
 									                        <form:input type="text" class="form-control" placeholder="Name..." path="name" disabled="${viewOnly}"/>
@@ -44,7 +44,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="row">
-                                                        <label for="middle-name"
+                                                        <label for="description"
                                                                class="control-label col-md-3 col-sm-3 col-12">Description</label>
                                                         <div class="col-md-6 col-sm-6 col-12">
 									                        <form:input type="text" class="form-control" placeholder="Description..." path="description" disabled="${viewOnly}"/>

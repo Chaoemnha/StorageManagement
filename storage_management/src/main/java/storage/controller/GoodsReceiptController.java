@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import storage.model.Invoice;
 import storage.model.Paging;
 import storage.model.ProductInfo;
+import storage.model.User;
 import storage.service.InvoiceService;
 import storage.service.ProductService;
 import storage.util.Constant;
@@ -60,7 +61,7 @@ public class GoodsReceiptController {
 	}
 
 	@RequestMapping(value = "/goods-receipt/list/{page}")
-	public String showInvoiceList(Model model, HttpSession session, @ModelAttribute("searchForm") Invoice invoice,
+	public String showInvoiceList(Model model, HttpSession session, @ModelAttribute("searchForm") Invoice invoice, BindingResult result,
 			@PathVariable("page") int page) {
 		Paging paging = new Paging(5);
 		paging.setIndexPage(page);
@@ -113,7 +114,7 @@ public class GoodsReceiptController {
 			model.addAttribute("titlePage", "View Invoice");
 			model.addAttribute("modelForm", invoice);
 			model.addAttribute("viewOnly", true);
-			return "invoice-action";
+			return "goods-receipt-action";
 		}
 		return "redirect:/goods-receipt/list";
 	}
@@ -147,7 +148,8 @@ public class GoodsReceiptController {
 			}
 		} else {
 			try {
-				invoiceService.save(invoice);
+				User user = (User) session.getAttribute(Constant.USER_INFO);
+				invoiceService.save(invoice, user);
 				session.setAttribute(Constant.MSG_SUCCESS, "Insert success!!!");
 			} catch (Exception e) {
 				// TODO Auto-generated catch block

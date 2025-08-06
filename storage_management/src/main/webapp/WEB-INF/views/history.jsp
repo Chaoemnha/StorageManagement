@@ -2,6 +2,13 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<script
+	src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script><!-- 1000000 => 1,000,000 -->
+<style>
+.price {
+	font-size: 14px;
+}
+</style>
 <div class="col-lg-12 right_col" role="main">
 	<div class="">
 		<div class="x_panel">
@@ -14,7 +21,7 @@
 				<div class="container">
 					<form:form modelAttribute="searchForm"
 						cssClass="form-horizontal form-label-left"
-						servletRelativeAction="/product-in-stock/list/1" method="POST">
+						servletRelativeAction="/history/list/1" method="POST">
 						<div class="form-group">
 							<div class="row">
 								<label class="control-label col-md-3 col-sm-3 col-12"
@@ -52,7 +59,7 @@
 								<div class="col-md-6 col-sm-6 col-12">
 									<form:select path="type" class="form-control">
 										<form:options items="${mapType }"/>
-									</form:select>>
+									</form:select>
 								</div>
 							</div>
 						</div>
@@ -96,7 +103,7 @@
 								<td class=" ">${history.productInfo.code}</td>
 								<td class=" ">${history.productInfo.name}</td>
 								<td class=" ">${history.qty}</td>
-								<td class=" ">${history.price}</td>
+								<td class="price">${history.price}</td>
 								<c:choose>
 									<c:when test="${history.type==1}">
 										<td>Goods Receipt</td>
@@ -124,8 +131,11 @@
 		document.getElementById('searchForm').action = '<c:url value=""/>' + page;
 		document.getElementById("searchForm").submit();
 	}
-  document.addEventListener("DOMContentLoaded", function () {
-	    processMessage();
+	$(document).ready(function(){
+		processMessage();
+		$('.price').each(function(){
+			$(this).text(numeral($(this).text()).format('0,0'));
+		})
 	});
     function processMessage() {
       var msgError = "${msgError}";

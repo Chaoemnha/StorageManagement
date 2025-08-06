@@ -35,4 +35,10 @@
 	<put-attribute name="body"
 		value="/WEB-INF/views/history.jsp"></put-attribute>
 </definition>
+<definition name="goods-receipt-list" extends="master">
+	<put-attribute name="body" value="/WEB-INF/views/goods-receipt-list.jsp"></put-attribute>
+</definition>
+<definition name="goods-receipt-action" extends="master">
+<put-attribute name="body" value="/WEB-INF/views/goods-receipt-action.jsp"></put-attribute>
+</definition>
 </tiles-definitions>
