@@ -57,7 +57,12 @@ public class ProductInStockService {
 	            ProductInStock productInStock = list.get(0);
 	            LOGGER.info("update qty="+invoice.getQty()+" and price="+invoice.getPrice());
 	            productInStock.setQty(productInStock.getQty()+invoice.getQty());
-	            
+	            if(invoice.getType()==Constant.TYPE_GOODS_ISSUES) {
+	            	productInStock.setQty(productInStock.getQty()-invoice.getQty());//10 - 5 = 5, 5 -(-3) = 8
+	            }
+	            else {
+	            	productInStock.setQty(productInStock.getQty()+invoice.getQty());
+	            }
 	            if(invoice.getType()==Constant.TYPE_GOODS_RECEIPT)
 	                productInStock.setPrice(invoice.getPrice());
 	            

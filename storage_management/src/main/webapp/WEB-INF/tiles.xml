@@ -41,4 +41,10 @@
 <definition name="goods-receipt-action" extends="master">
 <put-attribute name="body" value="/WEB-INF/views/goods-receipt-action.jsp"></put-attribute>
 </definition>
+<definition name="goods-issue-list" extends="master">
+	<put-attribute name="body" value="/WEB-INF/views/goods-issue-list.jsp"></put-attribute>
+</definition>
+<definition name="goods-issue-action" extends="master">
+<put-attribute name="body" value="/WEB-INF/views/goods-issue-action.jsp"></put-attribute>
+</definition>
 </tiles-definitions>
