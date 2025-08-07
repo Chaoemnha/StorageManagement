@@ -17,6 +17,8 @@
 				<div class="clearfix"></div>
 				<a class="btn btn-app" href="<c:url value="/goods-receipt/add"/>"><i
 					class="fa fa-plus"></i>Add</a>
+				<a class="btn btn-app" href="<c:url value="/goods-receipt/export"/>"><i
+					class="fa fa-cloud-download"></i>Export</a>
 			</div>
 
 			<div class="x_content">
