@@ -6,9 +6,9 @@
 	<div class="">
 		<div class="x_panel">
 			<div class="x_title">
-				<h2>Category List</h2>
+				<h2>Users List</h2>
 				<div class="clearfix"></div>
-				<a class="btn btn-app" href="<c:url value="/category/add"/>"><i
+				<a class="btn btn-app" href="<c:url value="/user/add"/>"><i
 					class="fa fa-plus"></i>Add</a>
 			</div>
 
@@ -16,33 +16,33 @@
 				<div class="container">
 					<form:form modelAttribute="searchForm"
 						cssClass="form-horizontal form-label-left"
-						servletRelativeAction="/category/list/1" method="POST">
+						servletRelativeAction="/user/list/1" method="POST">
 						<div class="form-group">
 							<div class="row">
-								<label for="id" class="control-label col-md-3 col-sm-3 col-12">ID</label>
-								<div class="col-md-6 col-sm-6 col-12">
-									<form:input type="text" class="form-control"
-										placeholder="Id..." path="id" />
-								</div>
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="row">
-								<label class="control-label col-md-3 col-sm-3 col-12" for="code">Code
-								</label>
-								<div class="col-md-6 col-sm-6 col-12">
-									<form:input type="text" class="form-control"
-										placeholder="Code..." path="code" />
-								</div>
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="row">
-								<label class="control-label col-md-3 col-sm-3 col-12" for="name">Name
-								</label>
+								<label for="name" class="control-label col-md-3 col-sm-3 col-12">Name</label>
 								<div class="col-md-6 col-sm-6 col-12">
 									<form:input type="text" class="form-control"
 										placeholder="Name..." path="name" />
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="row">
+								<label class="control-label col-md-3 col-sm-3 col-12" for="username">Username
+								</label>
+								<div class="col-md-6 col-sm-6 col-12">
+									<form:input type="text" class="form-control"
+										placeholder="Username..." path="userName" />
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="row">
+								<label class="control-label col-md-3 col-sm-3 col-12" for="email">Email
+								</label>
+								<div class="col-md-6 col-sm-6 col-12">
+									<form:input type="text" class="form-control"
+										placeholder="example@mail.com" path="email" />
 								</div>
 							</div>
 						</div>
@@ -62,16 +62,17 @@
 							<tr class="headings">
 								<th class="column-title">#</th>
 								<th class="column-title">ID</th>
-								<th class="column-title">Code</th>
+								<th class="column-title">Username</th>
 								<th class="column-title">Name</th>
-								<th class="column-title">Description</th>
+								<th class="column-title">Email</th>
+								<th class="column-title">Avatar</th>
 								<th class="column-title no-link last text-center" colspan="3"><span
 									class="nobr">Action</span></th>
 							</tr>
 						</thead>
 
 						<tbody>
-							<c:forEach items="${categories}" var="category" varStatus="loop">
+							<c:forEach items="${users}" var="user" varStatus="loop">
 								<c:choose>
 									<c:when test="${loop.index%2==0 }">
 										<tr class="even pointer">
@@ -81,21 +82,21 @@
 									</c:otherwise>
 								</c:choose>
 								<td class=" ">${pageInfo.getOffset()+loop.index+1 }</td>
-								<td class=" ">${category.id }</td>
-								<td class=" ">${category.code }</td>
-								<td class=" ">${category.name }</td>
-								<td class=" ">${category.description }</td>
+								<td class=" ">${user.id }</td>
+								<td class=" ">${user.userName }</td>
+								<td class=" ">${user.name }</td>
+								<td class=" ">${user.email }</td>
+								<td class=" "><img src="https://gravatar.com/avatar/${user.avatar}" alt="..." width="100px" height="100px"/></td>
 
 								<td><a
-									href="<c:url value="/category/view/${category.id }"/>"
+									href="<c:url value="/user/view/${user.id }"/>"
 									class="btn btn-round btn-info">View</a></td>
 								<td><a
-									href="<c:url value="/category/edit/${category.id }"/>"
+									href="<c:url value="/user/edit/${user.id }"/>"
 									class="btn btn-round btn-primary">Edit</a></td>
 								<td><a href="javascript:void(0)"
-									onclick="confirmDelete(${category.id})"
+									onclick="confirmDelete(${user.id})"
 									class="btn btn-round btn-danger"> Delete </a></td>
-
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -112,7 +113,7 @@
 <script type="text/javascript">
   function confirmDelete(id) {
     if (confirm("Do you want to delete this record?")) {
-      var baseUrl = '<c:url value="/category/delete/" />';
+      var baseUrl = '<c:url value="/user/delete/" />';
       window.location.href = baseUrl + id;
     }
   }

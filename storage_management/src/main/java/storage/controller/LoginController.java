@@ -66,8 +66,8 @@ public class LoginController {
 		return "login/login";
 	}
 	
-	@PutMapping("/login")
-	public String processRegister(@ModelAttribute("registerForm") @Validated User user, BindingResult result, Model model) {
+	@PostMapping("/processLogin")
+	public String processRegister(@ModelAttribute("registerForm") @Validated User user, BindingResult result, Model model) throws Exception {
         if (result.hasErrors()) {
             model.addAttribute("registerForm", user);
             model.addAttribute("loginForm", new User());
@@ -77,10 +77,10 @@ public class LoginController {
         // Lưu user mới
         String avatar = HashEmail.sha256Hex(user.getEmail());
         System.out.println("####Avatar: " + avatar);
-        User userSaved = userService.save(new User(user.getUserName(), user.getPassword(), user.getEmail(), user.getName(), avatar,1));
+        User userSaved = new User(user.getUserName(), user.getPassword(), user.getEmail(), user.getName(), avatar,1,1);
+        userService.save(userSaved);
         List<Role> role = roleService.findByProperty("id", 1);
         if(!role.isEmpty()) {
-        userRoleService.save(new UserRole(userSaved, role.get(0), 1));
         return "redirect:/login#signin";
         }
         return "login/login";

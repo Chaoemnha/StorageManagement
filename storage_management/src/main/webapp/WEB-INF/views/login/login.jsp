@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Asura storage management</title>
-
+	<script src="<c:url value='/resources/vendors/jquery/dist/jquery.js'/>"></script>
     <!-- Bootstrap -->
     <link href="<c:url value='/resources/vendors/bootstrap/dist/css/bootstrap.min.css' />" rel="stylesheet">
     <!-- Font Awesome -->
@@ -84,7 +84,7 @@
 
         <div id="register" class="animate form registration_form">
             <section class="login_content">
-                <form:form modelAttribute="registerForm" servletRelativeAction="/login" method="PUT">
+                <form:form modelAttribute="registerForm" servletRelativeAction="/processLogin" method="PUT">
                     <h1>Create Account</h1>
                     <div>
                         <form:input type="text" class="form-control" placeholder="Your Name..." path="name"/>
@@ -132,4 +132,9 @@
     </div>
 </div>
 </body>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('input[name="_method"]').attr("value", "POST");
+})
+</script>
 </html>
