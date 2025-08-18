@@ -1,29 +1,37 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-mapping PUBLIC 
-    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-
-<hibernate-mapping package="storage.model">
-    <class name="Role" table="role">
-        <id name="id" column="ID" type="java.lang.Integer">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated Jul 25, 2025, 4:22:25 PM by Hibernate Tools 5.6.15.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class catalog="storage_management" name="storage.model.Role" optimistic-lock="none" table="role">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID"/>
             <generator class="identity"/>
         </id>
-        
-        <property name="roleName" column="ROLE_NAME" type="string" length="50" not-null="true"/>
-        <property name="description" column="DESCRIPTION" type="string" length="200"/>
-        <property name="activeFlag" column="ACTIVE_FLAG" type="java.lang.Integer" not-null="true"/>
-        <property name="createDate" column="CREATE_DATE" type="timestamp"/>
-        <property name="updateDate" column="UPDATE_DATE" type="timestamp"/>
-        
-        <!-- One-to-Many relationships -->
-        <set name="userRoles" cascade="all" lazy="true" inverse="true">
-            <key column="ROLE_ID"/>
-            <one-to-many class="UserRole"/>
+        <property name="roleName" type="string">
+            <column length="50" name="ROLE_NAME" not-null="true"/>
+        </property>
+        <property name="description" type="string">
+            <column length="200" name="DESCRIPTION" not-null="true"/>
+        </property>
+        <property name="activeFlag" type="int">
+            <column name="ACTIVE_FLAG" not-null="true"/>
+        </property>
+        <property name="createDate" type="timestamp">
+            <column length="19" name="CREATE_DATE" not-null="true"/>
+        </property>
+        <property name="updateDate" type="timestamp">
+            <column length="19" name="UPDATE_DATE" not-null="true"/>
+        </property>
+        <set fetch="select" inverse="true" lazy="true" name="userRoles" table="user_role">
+            <key>
+                <column name="ROLE_ID" not-null="true"/>
+            </key>
+            <one-to-many class="storage.model.UserRole"/>
         </set>
-        
-        <set name="auths" cascade="all" lazy="true" inverse="true">
-            <key column="ROLE_ID"/>
-            <one-to-many class="Auth"/>
+        <set fetch="select" inverse="true" lazy="true" name="auths" table="auth">
+            <key>
+                <column name="ROLE_ID" not-null="true"/>
+            </key>
+            <one-to-many class="storage.model.Auth"/>
         </set>
     </class>
 </hibernate-mapping>

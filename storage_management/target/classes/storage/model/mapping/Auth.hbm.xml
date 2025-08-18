@@ -1,21 +1,28 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-mapping PUBLIC 
-    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-
-<hibernate-mapping package="storage.model">
-    <class name="Auth" table="auth">
-        <id name="id" column="ID" type="java.lang.Integer">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated Jul 25, 2025, 4:22:25 PM by Hibernate Tools 5.6.15.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class catalog="storage_management" name="storage.model.Auth" optimistic-lock="none" table="auth">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID"/>
             <generator class="identity"/>
         </id>
-        
-        <!-- Many-to-One relationships -->
-        <many-to-one name="role" column="ROLE_ID" class="Role" not-null="true" lazy="proxy"/>
-        <many-to-one name="menu" column="MENU_ID" class="Menu" not-null="true" lazy="proxy"/>
-        
-        <property name="permission" column="PERMISSION" type="java.lang.Integer" not-null="true"/>
-        <property name="activeFlag" column="ACTIVE_FLAG" type="java.lang.Integer" not-null="true"/>
-        <property name="createDate" column="CREATE_DATE" type="timestamp"/>
-        <property name="updateDate" column="UPDATE_DATE" type="timestamp"/>
+        <many-to-one class="storage.model.Menu" fetch="select" name="menu">
+            <column name="MENU_ID" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="storage.model.Role" fetch="select" name="role">
+            <column name="ROLE_ID" not-null="true"/>
+        </many-to-one>
+        <property name="permission" type="int">
+            <column name="PERMISSION" not-null="true"/>
+        </property>
+        <property name="activeFlag" type="int">
+            <column name="ACTIVE_FLAG" not-null="true"/>
+        </property>
+        <property name="createDate" type="timestamp">
+            <column length="19" name="CREATE_DATE" not-null="true"/>
+        </property>
+        <property name="updateDate" type="timestamp">
+            <column length="19" name="UPDATE_DATE" not-null="true"/>
+        </property>
     </class>
 </hibernate-mapping>

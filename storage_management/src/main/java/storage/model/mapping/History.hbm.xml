@@ -1,24 +1,37 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-mapping PUBLIC 
-    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-
-<hibernate-mapping package="storage.model">
-    <class name="History" table="history">
-        <id name="id" column="ID" type="java.lang.Integer">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated Jul 25, 2025, 4:22:25 PM by Hibernate Tools 5.6.15.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class catalog="storage_management" name="storage.model.History" optimistic-lock="none" table="history">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID"/>
             <generator class="identity"/>
         </id>
-        
-        <property name="actionName" column="ACTION_NAME" type="string" length="100"/>
-        <property name="type" column="TYPE" type="java.lang.Integer" not-null="true"/>
-        <property name="qty" column="QTY" type="java.lang.Integer" not-null="true"/>
-        <property name="price" column="PRICE" type="big_decimal" precision="15" scale="2" not-null="true"/>
-        <property name="activeFlag" column="ACTIVE_FLAG" type="java.lang.Integer" not-null="true"/>
-        <property name="createDate" column="CREATE_DATE" type="timestamp"/>
-        <property name="updateDate" column="UPDATE_DATE" type="timestamp"/>
-        
-        <!-- Many-to-One relationships -->
-        <many-to-one name="productInfo" column="PRODUCT_ID" class="ProductInfo" not-null="true" lazy="proxy"/>
-        <many-to-one name="user" column="USER_ID" class="User" lazy="proxy"/>
+        <many-to-one class="storage.model.ProductInfo" fetch="select" name="productInfo">
+            <column name="PRODUCT_ID" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="storage.model.User" fetch="select" name="user">
+            <column name="USER_ID"/>
+        </many-to-one>
+        <property name="actionName" type="string">
+            <column length="100" name="ACTION_NAME" not-null="true"/>
+        </property>
+        <property name="type" type="int">
+            <column name="TYPE" not-null="true"/>
+        </property>
+        <property name="qty" type="int">
+            <column name="QTY" not-null="true"/>
+        </property>
+        <property name="price" type="big_decimal">
+            <column name="PRICE" not-null="true" precision="15"/>
+        </property>
+        <property name="activeFlag" type="int">
+            <column name="ACTIVE_FLAG" not-null="true"/>
+        </property>
+        <property name="createDate" type="timestamp">
+            <column length="19" name="CREATE_DATE" not-null="true"/>
+        </property>
+        <property name="updateDate" type="timestamp">
+            <column length="19" name="UPDATE_DATE" not-null="true"/>
+        </property>
     </class>
 </hibernate-mapping>
