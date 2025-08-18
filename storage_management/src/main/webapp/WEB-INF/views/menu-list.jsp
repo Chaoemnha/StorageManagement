@@ -8,6 +8,8 @@
 			<div class="x_title">
 				<h2>Menus List</h2>
 				<div class="clearfix"></div>
+				<a class="btn btn-app" href="<c:url value="/menu/permission"/>"><i
+					class="fa fa-plus"></i>Permission</a>
 			</div>
 			<div class="x_content">
 				<div class="container">
@@ -71,19 +73,19 @@
 								<td class=" ">${menu.url }</td>
 								<c:choose>
 									<c:when test="${menu.activeFlag == 1}">
-										<td>Enable</td>
+										<td><a href="javascript:void(0);" onclick="confirmChange(${menu.id}, ${menu.activeFlag });" class="btn btn-round btn-success">Enable</a></td>
 									</c:when>
 									<c:otherwise>
-										<td>Disable</td>
+										<td><a href="javascript:void(0);" onclick="confirmChange(${menu.id}, ${menu.activeFlag });" class="btn btn-round btn-danger">Disable</a></td>
 									</c:otherwise>
 								</c:choose>
 								<c:forEach var="auth" items="${menu.mapAuth }">
 									<c:choose>
 										<c:when test="${auth.value==1 }">
-											<td><i class="fa fa-check"></i></td>
+											<td><i class="fa fa-check text-success"></i></td>
 										</c:when>
 										<c:otherwise>
-											<td><i class="fa fa-times"></i></td>
+											<td><i class="fa fa-times text-danger"></i></td>
 										</c:otherwise>
 									</c:choose>
 								</c:forEach>
@@ -103,6 +105,12 @@
 				+ page;
 		document.getElementById("searchForm").submit();
 	}
+	function confirmChange(id, flag){
+		var msg = flag==1?'Do you want to disable this menu?':'Do you want to enable this menu?';
+		if(confirm(msg)){
+			window.location.href='<c:url value="/menu/change-status/"/>'+id;
+			}
+			}
 	document.addEventListener("DOMContentLoaded", function() {
 		processMessage();
 	});

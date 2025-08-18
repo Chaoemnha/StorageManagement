@@ -1,9 +1,12 @@
 package storage.controller;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,14 +14,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import storage.model.Paging;
 import storage.model.Role;
 import storage.model.Auth;
 import storage.model.Menu;
+import storage.model.AuthForm;
 import storage.service.MenuService;
 import storage.service.RoleService;
+import storage.util.Constant;
 
 @Controller
 public class MenuController {
@@ -46,7 +52,7 @@ public class MenuController {
 				mapAuth.put(role.getId(), 0);//1-0 2-0 3-0
 			}
 			//Day cac gia tri tu Auth vao
-			for(Object obj: menu.getAuths()) {
+			for(Object obj: menu2.getAuths()) {
 				Auth auth = (Auth) obj;
 				mapAuth.put(auth.getRole().getId(), auth.getPermission());//1-1, 2-0, 3-0
 			}
@@ -57,5 +63,53 @@ public class MenuController {
 		model.addAttribute("roles",roles);
 		model.addAttribute("pageInfo", paging);
 		return "menu-list";
+	}
+	
+	@GetMapping("/menu/change-status/{id}")
+	public String change(Model model, @PathVariable("id") int id, HttpSession httpSession) {
+		try {
+			menuService.changeStatus(id);
+			httpSession.setAttribute(Constant.MSG_SUCCESS, "Change status success!!!");
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			httpSession.setAttribute(Constant.MSG_ERROR, "Change status has error!!!");
+		}
+		return "redirect:/menu/list";
+	}
+	
+	@GetMapping("/menu/permission")
+	public String permission(Model model) {
+		model.addAttribute("modelForm", new AuthForm());
+		initSelectbox(model);
+		return "menu-action";
+	}
+	
+	@PostMapping("/menu/update-permission")
+	public String updatePermission(Model model, HttpSession httpSession, @ModelAttribute("modelForm") AuthForm authForm) {
+		try {
+			menuService.updatePermission(authForm);
+			httpSession.setAttribute(Constant.MSG_SUCCESS, "Update success!!!");
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			httpSession.setAttribute(Constant.MSG_ERROR, "Update error!!!");
+		}
+		return "redirect:/menu/list";
+	}
+	
+	private void initSelectbox(Model model) {
+		List<Role> roles = roleService.getRoleList(null, null);
+		List<Menu> menus = menuService.getListMenu(null, null);
+		Map<Integer, String> mapRole = new HashMap<Integer, String>();
+		Map<Integer, String> mapMenu = new HashMap<Integer, String>();
+		for(Role role:roles) {
+			mapRole.put(role.getId(), role.getRoleName());
+		}
+		for(Menu menu:menus) {
+			mapMenu.put(menu.getId(), menu.getUrl());
+		}
+		model.addAttribute("mapRole", mapRole);
+		model.addAttribute("mapMenu", mapMenu);
 	}
 }
